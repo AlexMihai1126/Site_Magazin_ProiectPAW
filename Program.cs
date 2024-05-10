@@ -1,7 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using proiect.ContextModels;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<ProiectDBContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("ProiectDB")));
 
 var app = builder.Build();
 
