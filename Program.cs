@@ -1,11 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using proiect.ContextModels;
+using Microsoft.AspNetCore.Identity;
+using proiect.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<ProiectDBContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("ProiectDB")));
+
+builder.Services.AddDefaultIdentity<DefaultUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<UsersDBContext>();
+builder.Services.AddDbContext<UsersDBContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("ProiectDB")));
 
 var app = builder.Build();
@@ -23,6 +29,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
