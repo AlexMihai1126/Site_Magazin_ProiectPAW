@@ -55,7 +55,7 @@ namespace proiect.Areas.Identity.Pages.Account.Manage
             /// </summary>
             [Required]
             [DataType(DataType.Password)]
-            [Display(Name = "Current password")]
+            [Display(Name = "Parola curenta")]
             public string OldPassword { get; set; }
 
             /// <summary>
@@ -65,7 +65,7 @@ namespace proiect.Areas.Identity.Pages.Account.Manage
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "New password")]
+            [Display(Name = "Parola noua")]
             public string NewPassword { get; set; }
 
             /// <summary>
@@ -73,7 +73,7 @@ namespace proiect.Areas.Identity.Pages.Account.Manage
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm new password")]
+            [Display(Name = "Confirma parola noua")]
             [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
         }

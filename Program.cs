@@ -10,7 +10,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<ProiectDBContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("ProiectDB")));
 
-builder.Services.AddDefaultIdentity<DefaultUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<UsersDBContext>();
+builder.Services.AddDefaultIdentity<DefaultUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<UsersDBContext>();
 builder.Services.AddDbContext<UsersDBContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("ProiectDB")));
 

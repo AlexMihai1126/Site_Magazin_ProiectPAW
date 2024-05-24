@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using proiect.ContextModels;
 
@@ -11,9 +12,11 @@ using proiect.ContextModels;
 namespace proiect.Migrations
 {
     [DbContext(typeof(UsersDBContext))]
-    partial class UsersDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240524170556_addRoles")]
+    partial class addRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
