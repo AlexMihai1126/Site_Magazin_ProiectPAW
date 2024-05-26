@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using proiect.ContextModels;
 
@@ -10,10 +11,12 @@ using proiect.ContextModels;
 
 namespace proiect.Migrations
 {
-    [DbContext(typeof(UsersDBContext))]
-    partial class UsersDBContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ProiectDBContext))]
+    [Migration("20240526115737_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,21 +54,21 @@ namespace proiect.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cbc5d9b3-d0f2-4fe5-8b5d-f3cbcb0d2cc5",
+                            Id = "5dc5eadc-dba0-44a9-b5ec-f20f099e8555",
                             Name = "moderator",
-                            NormalizedName = "moderator"
+                            NormalizedName = "MODERATOR"
                         },
                         new
                         {
-                            Id = "25ed71d6-c83c-4960-bbd4-c1cd041350d4",
+                            Id = "4c6c515d-2ab2-4241-b0ba-ba7cabfad5d4",
                             Name = "client",
-                            NormalizedName = "client"
+                            NormalizedName = "CLIENT"
                         },
                         new
                         {
-                            Id = "60e2f73d-09cc-4bc4-9b01-25bf0f1b5b9f",
+                            Id = "429f83d5-2c04-43a0-b9de-bb27fe8a10a7",
                             Name = "vizitator",
-                            NormalizedName = "vizitator"
+                            NormalizedName = "VIZITATOR"
                         });
                 });
 
@@ -179,6 +182,42 @@ namespace proiect.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("proiect.Models.CategorieProdus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nume")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CategProdus");
+                });
+
+            modelBuilder.Entity("proiect.Models.CosCumparaturi", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CUserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CUserID");
+
+                    b.ToTable("CosCumparaturi");
+                });
+
             modelBuilder.Entity("proiect.Models.DefaultUser", b =>
                 {
                     b.Property<string>("Id")
@@ -244,6 +283,116 @@ namespace proiect.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("proiect.Models.ElementCosCumparaturi", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Cantitate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CosCumparaturiId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProdusId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CosCumparaturiId");
+
+                    b.HasIndex("ProdusId");
+
+                    b.ToTable("ElementCosCumparaturi");
+                });
+
+            modelBuilder.Entity("proiect.Models.Favorite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ProdusId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FUserId");
+
+                    b.HasIndex("ProdusId");
+
+                    b.ToTable("Favorite");
+                });
+
+            modelBuilder.Entity("proiect.Models.Produs", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategorieId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nume")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Pret")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategorieId");
+
+                    b.ToTable("Produs");
+                });
+
+            modelBuilder.Entity("proiect.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProdusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProdusId");
+
+                    b.HasIndex("RUserId");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -293,6 +442,109 @@ namespace proiect.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("proiect.Models.CosCumparaturi", b =>
+                {
+                    b.HasOne("proiect.Models.DefaultUser", "User")
+                        .WithMany("CosCumparaturi")
+                        .HasForeignKey("CUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("proiect.Models.ElementCosCumparaturi", b =>
+                {
+                    b.HasOne("proiect.Models.CosCumparaturi", "CosCumparaturi")
+                        .WithMany("Produse")
+                        .HasForeignKey("CosCumparaturiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proiect.Models.Produs", "Produs")
+                        .WithMany()
+                        .HasForeignKey("ProdusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CosCumparaturi");
+
+                    b.Navigation("Produs");
+                });
+
+            modelBuilder.Entity("proiect.Models.Favorite", b =>
+                {
+                    b.HasOne("proiect.Models.DefaultUser", "User")
+                        .WithMany("Favorite")
+                        .HasForeignKey("FUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proiect.Models.Produs", "Produs")
+                        .WithMany()
+                        .HasForeignKey("ProdusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Produs");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("proiect.Models.Produs", b =>
+                {
+                    b.HasOne("proiect.Models.CategorieProdus", "Categorie")
+                        .WithMany("Produse")
+                        .HasForeignKey("CategorieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categorie");
+                });
+
+            modelBuilder.Entity("proiect.Models.Review", b =>
+                {
+                    b.HasOne("proiect.Models.Produs", "Produs")
+                        .WithMany("Reviews")
+                        .HasForeignKey("ProdusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("proiect.Models.DefaultUser", "RUser")
+                        .WithMany("Reviews")
+                        .HasForeignKey("RUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Produs");
+
+                    b.Navigation("RUser");
+                });
+
+            modelBuilder.Entity("proiect.Models.CategorieProdus", b =>
+                {
+                    b.Navigation("Produse");
+                });
+
+            modelBuilder.Entity("proiect.Models.CosCumparaturi", b =>
+                {
+                    b.Navigation("Produse");
+                });
+
+            modelBuilder.Entity("proiect.Models.DefaultUser", b =>
+                {
+                    b.Navigation("CosCumparaturi");
+
+                    b.Navigation("Favorite");
+
+                    b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("proiect.Models.Produs", b =>
+                {
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

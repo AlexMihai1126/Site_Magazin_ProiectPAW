@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace proiect.Models
 {
@@ -11,8 +12,20 @@ namespace proiect.Models
         public string Nume { get; set; }
 
         public decimal Pret { get; set; }
-        [ForeignKey("CategorieProdus")]
+
+        // Foreign key property
+        [ForeignKey("Categorie")]
         public int CategorieId { get; set; }
 
+        // Navigation property for the category of the product
+        public CategorieProdus? Categorie { get; set; }
+
+        // Navigation property for reviews
+        public ICollection<Review> Reviews { get; set; }
+
+        public Produs()
+        {
+            Reviews = new List<Review>();
+        }
     }
 }

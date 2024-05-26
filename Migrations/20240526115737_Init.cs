@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace proiect.Migrations
 {
     /// <inheritdoc />
-    public partial class addAuth : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,6 +50,19 @@ namespace proiect.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CategProdus",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nume = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategProdus", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -156,6 +171,138 @@ namespace proiect.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CosCumparaturi",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CUserID = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CosCumparaturi", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CosCumparaturi_AspNetUsers_CUserID",
+                        column: x => x.CUserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Produs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nume = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Pret = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    CategorieId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Produs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Produs_CategProdus_CategorieId",
+                        column: x => x.CategorieId,
+                        principalTable: "CategProdus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ElementCosCumparaturi",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CosCumparaturiId = table.Column<int>(type: "int", nullable: false),
+                    ProdusId = table.Column<int>(type: "int", nullable: false),
+                    Cantitate = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ElementCosCumparaturi", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ElementCosCumparaturi_CosCumparaturi_CosCumparaturiId",
+                        column: x => x.CosCumparaturiId,
+                        principalTable: "CosCumparaturi",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ElementCosCumparaturi_Produs_ProdusId",
+                        column: x => x.ProdusId,
+                        principalTable: "Produs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Favorite",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProdusId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Favorite", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Favorite_AspNetUsers_FUserId",
+                        column: x => x.FUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Favorite_Produs_ProdusId",
+                        column: x => x.ProdusId,
+                        principalTable: "Produs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reviews",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProdusId = table.Column<int>(type: "int", nullable: false),
+                    RUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reviews", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reviews_AspNetUsers_RUserId",
+                        column: x => x.RUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Produs_ProdusId",
+                        column: x => x.ProdusId,
+                        principalTable: "Produs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "429f83d5-2c04-43a0-b9de-bb27fe8a10a7", null, "vizitator", "VIZITATOR" },
+                    { "4c6c515d-2ab2-4241-b0ba-ba7cabfad5d4", null, "client", "CLIENT" },
+                    { "5dc5eadc-dba0-44a9-b5ec-f20f099e8555", null, "moderator", "MODERATOR" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -194,6 +341,46 @@ namespace proiect.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CosCumparaturi_CUserID",
+                table: "CosCumparaturi",
+                column: "CUserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ElementCosCumparaturi_CosCumparaturiId",
+                table: "ElementCosCumparaturi",
+                column: "CosCumparaturiId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ElementCosCumparaturi_ProdusId",
+                table: "ElementCosCumparaturi",
+                column: "ProdusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Favorite_FUserId",
+                table: "Favorite",
+                column: "FUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Favorite_ProdusId",
+                table: "Favorite",
+                column: "ProdusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Produs_CategorieId",
+                table: "Produs",
+                column: "CategorieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_ProdusId",
+                table: "Reviews",
+                column: "ProdusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_RUserId",
+                table: "Reviews",
+                column: "RUserId");
         }
 
         /// <inheritdoc />
@@ -215,10 +402,28 @@ namespace proiect.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "ElementCosCumparaturi");
+
+            migrationBuilder.DropTable(
+                name: "Favorite");
+
+            migrationBuilder.DropTable(
+                name: "Reviews");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "CosCumparaturi");
+
+            migrationBuilder.DropTable(
+                name: "Produs");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "CategProdus");
         }
     }
 }

@@ -10,13 +10,11 @@ namespace proiect.Models
 
         [ForeignKey("CosCumparaturi")]
         public int CosCumparaturiId { get; set; }
-
-        public CosCumparaturi CosCumparaturi { get; set; }
+        public CosCumparaturi? CosCumparaturi { get; set; }
 
         [ForeignKey("Produs")]
         public int ProdusId { get; set; }
-
-        public Produs Produs { get; set; }
+        public Produs? Produs { get; set; }
 
         public int Cantitate { get; set; }
     }

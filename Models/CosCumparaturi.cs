@@ -1,6 +1,7 @@
-﻿
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace proiect.Models
 {
@@ -10,10 +11,12 @@ namespace proiect.Models
         public int Id { get; set; }
 
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public string CUserID { get; set; }
 
-        public DefaultUser User { get; set; }
+        // Navigation property for the user
+        public DefaultUser? User { get; set; }
 
+        // Navigation property for the products in the cart
         public ICollection<ElementCosCumparaturi> Produse { get; set; }
 
         public CosCumparaturi()

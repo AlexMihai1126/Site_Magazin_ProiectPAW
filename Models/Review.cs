@@ -11,11 +11,11 @@ namespace proiect.Models
 
         [ForeignKey("Produs")]
         public int ProdusId { get; set; }
-        public Produs Produs { get; set; }
+        public Produs? Produs { get; set; }
 
-        [ForeignKey("User")]
-        public int UserId { get; set; }
-        public DefaultUser User { get; set; }
+        [ForeignKey("DefaultUser")]
+        public string RUserId { get; set; }
+        public DefaultUser? RUser { get; set; }
 
         [Required]
         public string Content { get; set; }

@@ -1,3 +1,0 @@
-add-migration addAuth -Context UsersDBContext
-
-update-database -Context UsersDBContext
