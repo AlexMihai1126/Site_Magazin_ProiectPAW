@@ -12,6 +12,8 @@ namespace proiect.Models
         public string Nume { get; set; }
 
         public decimal Pret { get; set; }
+        public int Memorie { get; set; }
+        public string Dimensiune { get; set; }
 
         // Foreign key property
         [ForeignKey("Categorie")]

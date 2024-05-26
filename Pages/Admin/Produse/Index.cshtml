@@ -1,0 +1,41 @@
+﻿@page
+@model proiect.Pages.Admin.Produse.IndexModel
+@{
+}
+<h2 class="text-center mb-5">List of Products</h2>
+
+E<div class="row b-5">
+    <div class="col">
+        <a class='btn btn-primary' href='/Admin/Produse/Create'>Produs Nou</a>
+    </div>
+    <div class="col">
+
+    </div>
+</div>
+
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Nume</th>
+        <th>Pret</th>
+        <th>Memorie</th>
+        <th>Dimensiune</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach(var produs in Model.Produse)
+    {
+        <tr>
+            <td>@produs.Id</td>
+            <td>@produs.Nume</td>
+            <td>@(produs.Pret)RON</td>
+            <td>@(produs.Memorie)GB</td>
+            <td>@(produs.Dimensiune)mm</td>
+            <td style="white-space:nowrap">
+                <a class="btn btn-primary btn-sm" href="/Admin/Produse/Edit?id=@produs.Id">Edit</a>
+                <a class="btn btn-danger btn-sn" href="/Admin/Produse/Delete?id=@produs.Id">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
