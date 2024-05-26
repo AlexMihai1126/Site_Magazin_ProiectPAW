@@ -10,6 +10,7 @@ namespace proiect.ContextModels
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Favorite> Favorite { get; set; }
         public DbSet<CosCumparaturi> CosCumparaturi { get;set; }
+        public DbSet<ElementCosCumparaturi> ElementCosCumparaturi { get; set; }
         public ProiectDBContext(DbContextOptions<ProiectDBContext> options) : base(options) { }
     }
 }
