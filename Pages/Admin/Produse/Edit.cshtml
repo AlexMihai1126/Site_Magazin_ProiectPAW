@@ -1,17 +1,25 @@
 ﻿@page
-@model proiect.Pages.Admin.Produse.CreateModel
+@model proiect.Pages.Admin.Produse.EditModel
 @{
 }
 
 <div class="row">
     <div class="col-md-8 mx-auto rounded border p-3">
-        <h2 class="text-center mb-5">Produs Nou</h2>
+        <h2 class="text-center mb-5">Editare produs</h2>
 
         <form method="post" enctype="multipart/form-data">
+
             <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Nume</label> 
+                <label class="col-sm-4 col-form-label">ID</label>
                 <div class="col-sm-8">
-                    <input class="form-control" asp-for="ProdusDto.Nume"> 
+                    <input readonly class="form-control-plaintext" value="@Model.Produs.Id">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Nume</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="ProdusDto.Nume">
                     <span asp-validation-for="ProdusDto.Nume" class="text-danger"></span>
                 </div>
             </div>
@@ -43,7 +51,7 @@
             <div class="row mb-3">
                 <label class="col-sm-4 col-form-label">Categorie</label>
                 <div class="col-sm-8">
-                    <select class="form-select" asp-for="ProdusDto.CategorieId"> 
+                    <select class="form-select" asp-for="ProdusDto.CategorieId">
                         <option value=1>Telefoane</option>
                         <option value=2>Tablete</option>
                         <option value=3>Televizoare</option>
