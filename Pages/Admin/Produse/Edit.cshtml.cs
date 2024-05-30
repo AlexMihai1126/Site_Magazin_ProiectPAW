@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using proiect.ContextModels;
 using proiect.Models;
 
@@ -9,8 +10,9 @@ namespace proiect.Pages.Admin.Produse
     {
         private readonly IWebHostEnvironment environment;
         private readonly ProiectDBContext context;
+        public List<SelectListItem> Categorii { get; set; }
 
-       
+
         [BindProperty]
         public ProdusDto ProdusDto { get; set;} = new ProdusDto();
         public Produs Produs {  get; set; } = new Produs();
@@ -33,6 +35,7 @@ namespace proiect.Pages.Admin.Produse
                 Response.Redirect("/Admin/Produse/Index");
                 return;
             }
+            Categorii = context.CategProdus.Select(CategProdus => new SelectListItem { Text = CategProdus.Nume, Value = CategProdus.Id.ToString() }).ToList();
             ProdusDto.Nume = produs.Nume;
             ProdusDto.Pret = produs.Pret;
             ProdusDto.Memorie = produs.Memorie;

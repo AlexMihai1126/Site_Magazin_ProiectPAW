@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using proiect.ContextModels;
 using proiect.Models;
 using System.Drawing.Drawing2D;
@@ -10,6 +11,7 @@ namespace proiect.Pages.Admin.Produse
     {
         private readonly IWebHostEnvironment environment;
         private readonly ProiectDBContext context;
+        public List<SelectListItem> Categorii { get; set; }
 
         [BindProperty]
         public ProdusDto ProdusDto { get; set; }
@@ -21,6 +23,7 @@ namespace proiect.Pages.Admin.Produse
         public void OnGet()
         {
             ProdusDto = new ProdusDto();
+            Categorii = context.CategProdus.Select(CategProdus => new SelectListItem { Text = CategProdus.Nume, Value = CategProdus.Id.ToString() }).ToList();
         }
 
         public IActionResult OnPost()

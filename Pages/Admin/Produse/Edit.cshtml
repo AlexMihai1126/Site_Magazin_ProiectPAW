@@ -51,12 +51,11 @@
             <div class="row mb-3">
                 <label class="col-sm-4 col-form-label">Categorie</label>
                 <div class="col-sm-8">
-                    <select class="form-select" asp-for="ProdusDto.CategorieId">
-                        <option value=1>Telefoane</option>
-                        <option value=2>Tablete</option>
-                        <option value=3>Televizoare</option>
-                        <option value=4>Laptopuri</option>
-                    </select>
+                    <div class="form-group">
+                        <label asp-for="@Model.ProdusDto.CategorieId" class="control-label">Categorie</label>
+                        <select asp-for="@Model.ProdusDto.CategorieId" asp-items="@Model.Categorii" class="form-control"></select>
+                        <span asp-validation-for="@Model.ProdusDto.CategorieId" class="text-danger"></span>
+                    </div>
                 </div>
             </div>
 

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using proiect.ContextModels;
 using proiect.Models;
 using System.Linq;
@@ -18,7 +19,10 @@ namespace proiect.Pages.Admin.Produse
         }
         public void OnGet()
         {
-            Produs = context.Produs.OrderByDescending(p => p.Id).ToList();
+            Produs = context.Produs
+                        .Include(p => p.Categorie)
+                        .OrderByDescending(p => p.Id)
+                        .ToList();
         }
     }
 }
