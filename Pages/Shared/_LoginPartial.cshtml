@@ -8,21 +8,21 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
-        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Salut, @UserManager.GetUserName(User)!</a>
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Salut <i class="bi bi-balloon-heart"></i>, @UserManager.GetUserName(User)!</a>
     </li>
     <li class="nav-item">
         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Deconectare</button>
+                <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Deconectare <i class="bi bi-person-dash"></i></button>
         </form>
     </li>
 }
 else
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Creare cont</a>
+            <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Creare cont <i class="bi bi-person-add"></i></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Conectare</a>
+            <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Conectare <i class="bi bi-person-check"></i></a>
     </li>
 }
 </ul>
