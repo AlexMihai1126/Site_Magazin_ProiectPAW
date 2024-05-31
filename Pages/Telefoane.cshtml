@@ -1,0 +1,51 @@
+﻿@page
+@model proiect.Pages.Telefoane.IndexModel
+@{
+    ViewData["Title"] = "Telefoane";
+}
+
+<form method="get" asp-page="/Telefoane/Index">
+    <div class="form-group">
+        <label for="nume">Nume:</label>
+        <input type="text" class="form-control" id="nume" name="Nume">
+    </div>
+    <div class="form-group">
+        <label for="pretMin">Preț Minim:</label>
+        <input type="number" class="form-control" id="pretMin" name="PretMin">
+    </div>
+    <div class="form-group">
+        <label for="pretMax">Preț Maxim:</label>
+        <input type="number" class="form-control" id="pretMax" name="PretMax">
+    </div>
+    <div class="form-group">
+        <label for="memorieMin">Memorie Minimă:</label>
+        <input type="number" class="form-control" id="memorieMin" name="MemorieMin">
+    </div>
+    <div class="form-group">
+        <label for="memorieMax">Memorie Maximă:</label>
+        <input type="number" class="form-control" id="memorieMax" name="MemorieMax">
+    </div>
+    <div class="form-group">
+        <label for="dimensiune">Dimensiune:</label>
+        <input type="text" class="form-control" id="dimensiune" name="Dimensiune">
+    </div>
+    <button type="submit" class="btn btn-primary">Filtrează</button>
+</form>
+
+<div class="row mt-4">
+    @foreach (var produs in Model.Produs)
+    {
+        <div class="col-md-3">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">@produs.Nume</h5>
+                    <p class="card-text">@(produs.Pret) RON</p>
+                    <p class="card-text">Memorie: @(produs.Memorie) GB</p>
+                    <p class="card-text">Dimensiune: @(produs.Dimensiune) mm</p>
+                    <a href="/CosCumparaturi/AddToCart?id=@produs.Id" class="btn btn-primary">Adaugă în coș</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+ 
