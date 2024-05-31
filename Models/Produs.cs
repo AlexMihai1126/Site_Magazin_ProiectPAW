@@ -16,6 +16,8 @@ namespace proiect.Models
         public int Memorie { get; set; }
         public string Dimensiune { get; set; }
         public string ImageName { get; set; }
+        public int Stoc { get; set; }
+        public int NrBucVandute { get; set; }
 
         [ForeignKey("Categorie")]
         public int CategorieId { get; set; }
