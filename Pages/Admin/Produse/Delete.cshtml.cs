@@ -7,36 +7,49 @@ namespace proiect.Pages.Admin.Produse
 {
     public class DeleteModel : PageModel
     {
-        private readonly IWebHostEnvironment environment;
-        private readonly ProiectDBContext context;
+        private readonly ProiectDBContext _context;
 
-        public DeleteModel(IWebHostEnvironment environment, ProiectDBContext context)
+        public DeleteModel(ProiectDBContext context)
         {
-            this.environment = environment;
-            this.context = context;
+            _context = context;
         }
-        public void OnGet(int? id)
+
+        [BindProperty]
+        public Produs Produs { get; set; }
+
+        public IActionResult OnGet(int? id)
         {
             if (id == null)
             {
-                Response.Redirect("/Admin/Produse/Index");
-                return;
+                return NotFound();
             }
 
-            var produs = context.Produs.Find(id);
-            if (produs == null)
+            Produs = _context.Produs.Find(id);
+
+            if (Produs == null)
             {
-                Response.Redirect("/Admin/Produse/Index");
-                return;
+                return NotFound();
             }
 
-            context.Produs.Remove(produs);
-            context.SaveChanges();
-
-            Response.Redirect("/Admin/Produse/Index");
+            return Page();
         }
-        public void OnPost(int? id) { 
-            // de facut "Sigur vrei sa stergi acest produs?"
+
+        public IActionResult OnPost(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Produs = _context.Produs.Find(id);
+
+            if (Produs != null)
+            {
+                _context.Produs.Remove(Produs);
+                _context.SaveChanges();
+            }
+
+            return RedirectToPage("/Admin/Produse/Index");
         }
     }
 }

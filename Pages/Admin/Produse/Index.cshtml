@@ -12,9 +12,17 @@
     </div>
 
     <hr />
-
-    <table class="table table-striped table-hover">
-        <thead>
+    @if (Model.Produs.Count() == 0)
+    {
+        <div class="<div class=" col-md-3 col-sm-6 mb-4">
+            <div class="alert alert-danger mx-auto role="alert">
+                Nu s-au găsit produse.
+            </div>
+        </div>
+    } else
+    {
+        <table class="table table-striped table-hover">
+            <thead>
             <th>Brand</th>
             <th>Model</th>
             <th>Descriere</th>
@@ -25,27 +33,58 @@
             <th>Categorie</th>
             <th>Imagine</th>
             <th>Actiuni</th>
-        </thead>
+            </thead>
 
-        <tbody class="table-group-divider">
-            @foreach (var produs in Model.Produs)
-            {
-                <tr>
-                    <td>@produs.Brand</td>
-                    <td>@produs.Model</td>
-                    <td>@produs.Descriere</td>
-                    <td>@produs.Culoare</td>
-                    <td>@(produs.Pret) RON</td>
-                    <td>@(produs.Memorie) GB</td>
-                    <td>@(produs.Dimensiune) mm</td>
-                    <td>@(produs.Categorie.Nume)</td>
-                    <td>@produs.ImageName</td>
-                    <td style="white-space:nowrap">
-                        <button type="button" class="btn btn-sm btn-success" onclick="window.location.href='/Admin/Produse/Edit?id=@produs.Id'">Edit</button>
-                        <button type="button" class="btn btn-sm btn-danger" onclick="window.location.href='/Admin/Produse/Delete?id=@produs.Id'">Delete</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+            <tbody class="table-group-divider">
+
+                @foreach (var produs in Model.Produs)
+                {
+                    <tr>
+                        <td>@produs.Brand</td>
+                        <td>@produs.Model</td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#prodDescModal-@produs.Id">Descriere</button>
+
+                            
+
+                        </td>
+                        <td>@produs.Culoare</td>
+                        <td>@(produs.Pret) RON</td>
+                        <td>@(produs.Memorie) GB</td>
+                        <td>@(produs.Dimensiune)</td>
+                        <td>@(produs.Categorie.Nume)</td>
+                        <td>@produs.ImageName</td>
+                        <td style="white-space:nowrap">
+                            <button type="button" class="btn btn-sm btn-success" onclick="window.location.href='/Admin/Produse/Edit?id=@produs.Id'">Edit</button>
+                            <button type="button" class="btn btn-sm btn-danger" onclick="window.location.href='/Admin/Produse/Delete?id=@produs.Id'">Delete</button>
+                        </td>
+                    </tr>
+                    
+                }
+
+            </tbody>
+        </table>
+
+        @foreach (var produs in Model.Produs)
+        {
+            <div class="modal fade" id="prodDescModal-@produs.Id" tabindex="-1" aria-labelledby="prodDescModalLabel-@produs.Id" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="prodDescModalLabel-@produs.Id">Detalii produs</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>@produs.Descriere</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Închide</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    }
+    
 </div>

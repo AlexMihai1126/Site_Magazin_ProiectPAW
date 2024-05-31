@@ -2,3 +2,20 @@
 @model proiect.Pages.Admin.Produse.DeleteModel
 @{
 }
+
+<div class="container">
+    <h1 class="text-center mb-5">Confirmare stergere</h1>
+    <hr />
+    <h2 class="text-center">Sigur doresti sa stergi produsul?</h2>
+    <hr />
+    <form method="post">
+        <input type="hidden" name="id" value="@Model.Produs.Id" />
+
+        <div class="mb-3 row">
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-danger">Sterge</button>
+                <a class="btn btn-secondary" href="/Admin/Produse/Index" role="button">Anuleaza</a>
+            </div>
+        </div>
+    </form>
+</div>

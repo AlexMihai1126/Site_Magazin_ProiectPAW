@@ -60,44 +60,56 @@
 
     <hr />
     <div class="row mt-4">
-        @foreach (var produs in Model.Produs)
+        @if(Model.Produs.Count() == 0)
         {
-            <div class="col-md-3 col-sm-6 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="@($"http://localhost:3000/image/{produs.ImageName}")" class="card-img-top" alt="@produs.Model">
+            <div class="<div class=" col-md-3 col-sm-6 mb-4">
+                <div class="alert alert-danger mx-auto role="alert">
+                    Nu s-au găsit produse.
+                </div>
+             </div>
+            
+        } else
+        {
+            @foreach (var produs in Model.Produs)
+            {
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="@($"http://localhost:3000/image/{produs.ImageName}")" class="card-img-top" alt="@produs.Model">
 
-                    <div class="card-body">
-                        <h4 class="card-title"><strong>@produs.Model</strong></h4>
-                        <h6 class="card-text"><strong>Brand: </strong>@produs.Brand</h6>
-                        <hr />
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><p class="card-text"><strong>Preț: </strong> @(produs.Pret) RON</p></li>
-                            <li class="list-group-item"> <p class="card-text"><strong>Memorie: </strong> @(produs.Memorie) GB</p></li>
-                        </ul>
+                        <div class="card-body">
+                            <h4 class="card-title"><strong>@produs.Model</strong></h4>
+                            <h6 class="card-text"><strong>Brand: </strong>@produs.Brand</h6>
+                            <hr />
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><p class="card-text"><strong>Preț: </strong> @(produs.Pret) RON</p></li>
+                                <li class="list-group-item"> <p class="card-text"><strong>Memorie: </strong> @(produs.Memorie) GB</p></li>
+                            </ul>
 
-                        <div class="accordion" id="@($"prodDesc{produs.Id}")">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#@($"prodDescExpand{produs.Id}")" aria-expanded="true" aria-controls="@($"prodDescExpand{produs.Id}")">
-                                        Detalii produs
-                                    </button>
-                                </h2>
-                                <div id="@($"prodDescExpand{produs.Id}")" class="accordion-collapse collapse" data-bs-parent="#@($"prodDesc{produs.Id}")">
-                                    <div class="accordion-body">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item"><p class="card-text"><strong>Dimensiune: </strong> @(produs.Dimensiune)</p></li>
-                                            <li class="list-group-item"><p class="card-text"><strong>Culoare: </strong>@(produs.Culoare)</p></li>
-                                            <li class="list-group-item"><p class="card-text"><strong>Descriere: </strong>@(produs.Descriere)</p></li>
-                                        </ul>
+                            <div class="accordion" id="@($"prodDesc{produs.Id}")">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#@($"prodDescExpand{produs.Id}")" aria-expanded="true" aria-controls="@($"prodDescExpand{produs.Id}")">
+                                            Detalii produs
+                                        </button>
+                                    </h2>
+                                    <div id="@($"prodDescExpand{produs.Id}")" class="accordion-collapse collapse" data-bs-parent="#@($"prodDesc{produs.Id}")">
+                                        <div class="accordion-body">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item"><p class="card-text"><strong>Dimensiune: </strong> @(produs.Dimensiune)</p></li>
+                                                <li class="list-group-item"><p class="card-text"><strong>Culoare: </strong>@(produs.Culoare)</p></li>
+                                                <li class="list-group-item"><p class="card-text"><strong>Descriere: </strong>@(produs.Descriere)</p></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <hr />
+                            <a href="/CosCumparaturi/AddToCart?id=@produs.Id" class="btn btn-primary w-100">Adaugă în coș</a>
                         </div>
-                        <hr />
-                        <a href="/CosCumparaturi/AddToCart?id=@produs.Id" class="btn btn-primary w-100">Adaugă în coș</a>
                     </div>
                 </div>
-            </div>
+            }
         }
+        
     </div>
 </div>
