@@ -1,0 +1,32 @@
+﻿@page
+@model proiect.Pages.ViewProdusModel
+
+<div class="container">
+    <h2 class="text-center mb-5">Vizualizare produs @Model.Produs.Model</h2>
+    <hr />
+    <div class="d-grid gap-2">
+        <a href="/Telefoane" class="btn btn-secondary w-100">Inapoi</a>
+    </div>
+    
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <img src="@($"http://localhost:3000/image/{Model.Produs.ImageName}")" alt="@Model.Produs.Model" class="img-fluid">
+        </div>
+        <div class="col-md-8">
+            <h4>Model: <strong>@Model.Produs.Model</strong></h4>
+            <h5>Brand: <strong>@Model.Produs.Brand</strong></h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><p>Culoare: <strong>@Model.Produs.Culoare</strong></p></li>
+                <li class="list-group-item"><p>Memorie: <strong>@Model.Produs.Memorie GB</strong></p></li>
+                <li class="list-group-item"><p>Dimensiuni: <strong>@Model.Produs.Dimensiune</strong></p></li>
+                <li class="list-group-item"><p>Descriere: <strong>@Model.Produs.Descriere</strong></p></li>
+                <li class="list-group-item"><p>Categorie: <strong>@Model.Produs.Categorie.Nume</strong></p></li>
+            </ul>    
+            <h4>Pret: <strong>@Model.Produs.Pret LEI</strong></h4>
+            <div class="d-grid gap-2">
+                <a href="/CosCumparaturi/AddToCart?id=@Model.Produs.Id" class="btn btn-info w-100">Adaugă în coș</a>
+            </div>
+        </div>
+    </div>
+</div>

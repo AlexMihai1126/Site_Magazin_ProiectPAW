@@ -9,7 +9,7 @@
     <div class="accordion mb-4" id="filtrari-meniu">
         <div class="accordion-item">
             <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#filtrari-meniu-data" aria-expanded="true" aria-controls="filtrari-meniu-data">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filtrari-meniu-data" aria-expanded="true" aria-controls="filtrari-meniu-data">
                     Filtrare produse
                 </button>
             </h2>
@@ -88,7 +88,7 @@
                             <div class="accordion" id="@($"prodDesc{produs.Id}")">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#@($"prodDescExpand{produs.Id}")" aria-expanded="true" aria-controls="@($"prodDescExpand{produs.Id}")">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#@($"prodDescExpand{produs.Id}")" aria-expanded="true" aria-controls="@($"prodDescExpand{produs.Id}")">
                                             Detalii produs
                                         </button>
                                     </h2>
@@ -97,14 +97,18 @@
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item"><p class="card-text"><strong>Dimensiune: </strong> @(produs.Dimensiune)</p></li>
                                                 <li class="list-group-item"><p class="card-text"><strong>Culoare: </strong>@(produs.Culoare)</p></li>
-                                                <li class="list-group-item"><p class="card-text"><strong>Descriere: </strong>@(produs.Descriere)</p></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <hr />
-                            <a href="/CosCumparaturi/AddToCart?id=@produs.Id" class="btn btn-primary w-100">Adaugă în coș</a>
+                            <div class="d-flex justify-content-center">
+                                <div class="btn-group" role="group">
+                                    <a href="/ViewProdus/?id=@produs.Id" class="btn btn-secondary">Vezi detalii</a>
+                                    <a href="/CosCumparaturi/AddToCart?id=@produs.Id" class="btn btn-info">Adaugă în coș</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
