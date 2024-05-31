@@ -8,21 +8,19 @@ namespace proiect.Models
     {
         [Key]
         public int Id { get; set; }
-
         public string Nume { get; set; }
-
+        public string Brand { get; set; }
+        public string Model { get; set; }
         public decimal Pret { get; set; }
         public int Memorie { get; set; }
         public string Dimensiune { get; set; }
+        public string ImageName { get; set; }
 
-        // Foreign key property
         [ForeignKey("Categorie")]
         public int CategorieId { get; set; }
 
-        // Navigation property for the category of the product
         public CategorieProdus? Categorie { get; set; }
 
-        // Navigation property for reviews
         public ICollection<Review> Reviews { get; set; }
 
         public Produs()

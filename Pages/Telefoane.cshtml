@@ -53,7 +53,7 @@
         {
             <div class="col-md-3 col-sm-6 mb-4">
                 <div class="card h-100 shadow-sm">
-                    @* <img src="@produs.ImageUrl" class="card-img-top" alt="@produs.Nume"> *@
+                    <img src="@($"http://localhost:3000/image/{produs.ImageName}")" class="card-img-top" alt="@produs.Nume">
                     <div class="card-body">
                         <h5 class="card-title">@produs.Nume</h5>
                         <p class="card-text"><strong>Preț:</strong> @(produs.Pret) RON</p>
