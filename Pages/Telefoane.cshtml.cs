@@ -21,7 +21,16 @@ namespace proiect.Pages.Telefoane
         public IList<Produs> Produs { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public string Descriere { get; set; }
+        public string Brand { get; set; }
+
+
+        [BindProperty(SupportsGet = true)]
+        public string Culoare { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string Model { get; set; }
+
+
         [BindProperty(SupportsGet = true)]
         public decimal? PretMin { get; set; }
         [BindProperty(SupportsGet = true)]
@@ -37,10 +46,25 @@ namespace proiect.Pages.Telefoane
         {
             IQueryable<Produs> query = _context.Produs.Include(p => p.Categorie).Where(p => p.Categorie.Nume == "Telefoane");
 
-            if (!string.IsNullOrEmpty(Descriere))
+            if (!string.IsNullOrEmpty(Brand))
             {
-                query = query.Where(p => p.Descriere.Contains(Descriere));
+                string brandLower = Brand.ToLower();
+                query = query.Where(p => p.Brand.ToLower().Contains(brandLower));
             }
+
+            if (!string.IsNullOrEmpty(Culoare))
+            {
+                string culoareLower = Culoare.ToLower();
+                query = query.Where(p => p.Culoare.ToLower().Contains(culoareLower));
+            }
+
+            if (!string.IsNullOrEmpty(Model))
+            {
+                string modelLower = Model.ToLower();
+                query = query.Where(p => p.Model.ToLower().Contains(modelLower));
+            }
+
+
             if (PretMin.HasValue)
             {
                 query = query.Where(p => p.Pret >= PretMin);
