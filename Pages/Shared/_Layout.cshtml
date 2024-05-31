@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/proiect.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -40,9 +43,6 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" asp-area="" asp-page="/Admin/Produse/Index">Produse</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/Index">Home</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/Index">Home</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -58,12 +58,6 @@
         </nav>
     </header>
 
-    <div class="btn-group container-fluid" role="group">
-        <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/telefoane")'">Telefoane <i class="bi bi-phone"></i></button>
-        <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/Televizoare/Index")'">Televizoare <i class="bi bi-tv"></i></button>
-        <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/Tablete/Index")'">Tablete <i class="bi bi-tablet-landscape"></i></button>
-        <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/Laptopuri/Index")'">Laptopuri <i class="bi bi-laptop"></i></button>
-    </div>
 
     <main role="main" class="pb-3">
         @RenderBody()

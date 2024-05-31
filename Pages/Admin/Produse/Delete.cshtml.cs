@@ -35,5 +35,8 @@ namespace proiect.Pages.Admin.Produse
 
             Response.Redirect("/Admin/Produse/Index");
         }
+        public void OnPost(int? id) { 
+            // de facut "Sigur vrei sa stergi acest produs?"
+        }
     }
 }

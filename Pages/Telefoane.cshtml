@@ -3,49 +3,66 @@
 @{
     ViewData["Title"] = "Telefoane";
 }
-
-<form method="get" asp-page="/Telefoane/Index">
-    <div class="form-group">
-        <label for="nume">Nume:</label>
-        <input type="text" class="form-control" id="nume" name="Nume">
-    </div>
-    <div class="form-group">
-        <label for="pretMin">Preț Minim:</label>
-        <input type="number" class="form-control" id="pretMin" name="PretMin">
-    </div>
-    <div class="form-group">
-        <label for="pretMax">Preț Maxim:</label>
-        <input type="number" class="form-control" id="pretMax" name="PretMax">
-    </div>
-    <div class="form-group">
-        <label for="memorieMin">Memorie Minimă:</label>
-        <input type="number" class="form-control" id="memorieMin" name="MemorieMin">
-    </div>
-    <div class="form-group">
-        <label for="memorieMax">Memorie Maximă:</label>
-        <input type="number" class="form-control" id="memorieMax" name="MemorieMax">
-    </div>
-    <div class="form-group">
-        <label for="dimensiune">Dimensiune:</label>
-        <input type="text" class="form-control" id="dimensiune" name="Dimensiune">
-    </div>
-    <button type="submit" class="btn btn-primary">Filtrează</button>
-</form>
-
-<div class="row mt-4">
-    @foreach (var produs in Model.Produs)
-    {
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">@produs.Nume</h5>
-                    <p class="card-text">@(produs.Pret) RON</p>
-                    <p class="card-text">Memorie: @(produs.Memorie) GB</p>
-                    <p class="card-text">Dimensiune: @(produs.Dimensiune) mm</p>
-                    <a href="/CosCumparaturi/AddToCart?id=@produs.Id" class="btn btn-primary">Adaugă în coș</a>
+<div class="container-fluid mx-auto">
+    <h1 class="text-center my-4">Telefoane</h1>
+    <hr />
+    <div class="accordion mb-4" id="filtrari-meniu">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Filtrare produse
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#filtrari-meniu">
+                <div class="accordion-body">
+                    <form method="get" asp-page="/Telefoane/Index">
+                        <div class="mb-3">
+                            <label for="nume" class="form-label">Nume:</label>
+                            <input type="text" class="form-control" id="nume" name="Nume">
+                        </div>
+                        <div class="mb-3">
+                            <label for="pretMin" class="form-label">Preț Minim:</label>
+                            <input type="number" class="form-control" id="pretMin" name="PretMin">
+                        </div>
+                        <div class="mb-3">
+                            <label for="pretMax" class="form-label">Preț Maxim:</label>
+                            <input type="number" class="form-control" id="pretMax" name="PretMax">
+                        </div>
+                        <div class="mb-3">
+                            <label for="memorieMin" class="form-label">Memorie Minimă:</label>
+                            <input type="number" class="form-control" id="memorieMin" name="MemorieMin">
+                        </div>
+                        <div class="mb-3">
+                            <label for="memorieMax" class="form-label">Memorie Maximă:</label>
+                            <input type="number" class="form-control" id="memorieMax" name="MemorieMax">
+                        </div>
+                        <div class="mb-3">
+                            <label for="dimensiune" class="form-label">Dimensiune:</label>
+                            <input type="text" class="form-control" id="dimensiune" name="Dimensiune">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Filtrează</button>
+                    </form>
                 </div>
             </div>
         </div>
-    }
+    </div>
+
+    <hr />
+    <div class="row mt-4">
+        @foreach (var produs in Model.Produs)
+        {
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    @* <img src="@produs.ImageUrl" class="card-img-top" alt="@produs.Nume"> *@
+                    <div class="card-body">
+                        <h5 class="card-title">@produs.Nume</h5>
+                        <p class="card-text"><strong>Preț:</strong> @(produs.Pret) RON</p>
+                        <p class="card-text"><strong>Memorie:</strong> @(produs.Memorie) GB</p>
+                        <p class="card-text"><strong>Dimensiune:</strong> @(produs.Dimensiune) mm</p>
+                        <a href="/CosCumparaturi/AddToCart?id=@produs.Id" class="btn btn-primary w-100">Adaugă în coș</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
- 
