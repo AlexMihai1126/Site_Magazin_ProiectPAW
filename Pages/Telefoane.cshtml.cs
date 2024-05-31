@@ -21,7 +21,7 @@ namespace proiect.Pages.Telefoane
         public IList<Produs> Produs { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public string Nume { get; set; }
+        public string Descriere { get; set; }
         [BindProperty(SupportsGet = true)]
         public decimal? PretMin { get; set; }
         [BindProperty(SupportsGet = true)]
@@ -37,9 +37,9 @@ namespace proiect.Pages.Telefoane
         {
             IQueryable<Produs> query = _context.Produs.Include(p => p.Categorie).Where(p => p.Categorie.Nume == "Telefoane");
 
-            if (!string.IsNullOrEmpty(Nume))
+            if (!string.IsNullOrEmpty(Descriere))
             {
-                query = query.Where(p => p.Nume.Contains(Nume));
+                query = query.Where(p => p.Descriere.Contains(Descriere));
             }
             if (PretMin.HasValue)
             {

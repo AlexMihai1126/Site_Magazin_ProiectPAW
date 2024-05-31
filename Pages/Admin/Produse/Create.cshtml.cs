@@ -36,7 +36,11 @@ namespace proiect.Pages.Admin.Produse
             // save the new product in the database
             Produs produs = new Produs
             {
-                Nume = ProdusDto.Nume,
+                Brand = ProdusDto.Brand,
+                Model = ProdusDto.Model,
+                Descriere = ProdusDto.Descriere,
+                ImageName = ProdusDto.ImageName,
+                Culoare = ProdusDto.Culoare,
                 Pret = ProdusDto.Pret,
                 Memorie = ProdusDto.Memorie,
                 Dimensiune = ProdusDto.Dimensiune,

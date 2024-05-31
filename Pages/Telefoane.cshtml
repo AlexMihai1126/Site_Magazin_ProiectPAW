@@ -9,16 +9,16 @@
     <div class="accordion mb-4" id="filtrari-meniu">
         <div class="accordion-item">
             <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#filtrari-meniu-data" aria-expanded="true" aria-controls="filtrari-meniu-data">
                     Filtrare produse
                 </button>
             </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#filtrari-meniu">
+            <div id="filtrari-meniu-data" class="accordion-collapse collapse" data-bs-parent="#filtrari-meniu">
                 <div class="accordion-body">
                     <form method="get" asp-page="/Telefoane/Index">
                         <div class="mb-3">
-                            <label for="nume" class="form-label">Nume:</label>
-                            <input type="text" class="form-control" id="nume" name="Nume">
+                            <label for="descriere" class="form-label">Descriere:</label>
+                            <input type="text" class="form-control" id="descriere" name="Descriere">
                         </div>
                         <div class="mb-3">
                             <label for="pretMin" class="form-label">Preț Minim:</label>
@@ -53,12 +53,36 @@
         {
             <div class="col-md-3 col-sm-6 mb-4">
                 <div class="card h-100 shadow-sm">
-                    <img src="@($"http://localhost:3000/image/{produs.ImageName}")" class="card-img-top" alt="@produs.Nume">
+                    <img src="@($"http://localhost:3000/image/{produs.ImageName}")" class="card-img-top" alt="@produs.Model">
+
                     <div class="card-body">
-                        <h5 class="card-title">@produs.Nume</h5>
-                        <p class="card-text"><strong>Preț:</strong> @(produs.Pret) RON</p>
-                        <p class="card-text"><strong>Memorie:</strong> @(produs.Memorie) GB</p>
-                        <p class="card-text"><strong>Dimensiune:</strong> @(produs.Dimensiune) mm</p>
+                        <h4 class="card-title"><strong>@produs.Model</strong></h4>
+                        <h6 class="card-text"><strong>Brand: </strong>@produs.Brand</h6>
+                        <hr />
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><p class="card-text"><strong>Preț: </strong> @(produs.Pret) RON</p></li>
+                            <li class="list-group-item"> <p class="card-text"><strong>Memorie: </strong> @(produs.Memorie) GB</p></li>
+                        </ul>
+
+                        <div class="accordion" id="@($"prodDesc{produs.Id}")">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#@($"prodDescExpand{produs.Id}")" aria-expanded="true" aria-controls="@($"prodDescExpand{produs.Id}")">
+                                        Detalii produs
+                                    </button>
+                                </h2>
+                                <div id="@($"prodDescExpand{produs.Id}")" class="accordion-collapse collapse" data-bs-parent="#@($"prodDesc{produs.Id}")">
+                                    <div class="accordion-body">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><p class="card-text"><strong>Dimensiune: </strong> @(produs.Dimensiune)</p></li>
+                                            <li class="list-group-item"><p class="card-text"><strong>Culoare: </strong>@(produs.Culoare)</p></li>
+                                            <li class="list-group-item"><p class="card-text"><strong>Descriere: </strong>@(produs.Descriere)</p></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
                         <a href="/CosCumparaturi/AddToCart?id=@produs.Id" class="btn btn-primary w-100">Adaugă în coș</a>
                     </div>
                 </div>

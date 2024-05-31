@@ -14,8 +14,8 @@ namespace proiect.Pages.Admin.Produse
 
 
         [BindProperty]
-        public ProdusDto ProdusDto { get; set;} = new ProdusDto();
-        public Produs Produs {  get; set; } = new Produs();
+        public ProdusDto ProdusDto { get; set; } = new ProdusDto();
+        public Produs Produs { get; set; } = new Produs();
         public EditModel(IWebHostEnvironment environment, ProiectDBContext context)
         {
             this.environment = environment;
@@ -36,7 +36,11 @@ namespace proiect.Pages.Admin.Produse
                 return;
             }
             Categorii = context.CategProdus.Select(CategProdus => new SelectListItem { Text = CategProdus.Nume, Value = CategProdus.Id.ToString() }).ToList();
-            ProdusDto.Nume = produs.Nume;
+            ProdusDto.Brand = produs.Brand;
+            ProdusDto.Model = produs.Model;
+            ProdusDto.Descriere = produs.Descriere;
+            ProdusDto.Culoare = produs.Culoare;
+            ProdusDto.ImageName = produs.ImageName;
             ProdusDto.Pret = produs.Pret;
             ProdusDto.Memorie = produs.Memorie;
             ProdusDto.Dimensiune = produs.Dimensiune;
@@ -45,8 +49,8 @@ namespace proiect.Pages.Admin.Produse
             Produs = produs;
         }
 
-        public void OnPost(int? id) 
-        { 
+        public void OnPost(int? id)
+        {
             if (id == null)
             {
                 Response.Redirect("/Admin/Produse/Index");
@@ -54,14 +58,18 @@ namespace proiect.Pages.Admin.Produse
             }
 
             var produs = context.Produs.Find(id);
-            if (produs == null) 
+            if (produs == null)
             {
                 Response.Redirect("/Admin/Produse/Index");
                 return;
             }
 
             // update produs in baza de date 
-            produs.Nume = ProdusDto.Nume;
+            produs.Brand = ProdusDto.Brand;
+            produs.Model = ProdusDto.Model;
+            produs.Descriere = ProdusDto.Descriere;
+            produs.Culoare = ProdusDto.Culoare;
+            produs.ImageName = ProdusDto.ImageName;
             produs.Pret = ProdusDto.Pret;
             produs.Memorie = ProdusDto.Memorie;
             produs.Dimensiune = ProdusDto.Dimensiune;

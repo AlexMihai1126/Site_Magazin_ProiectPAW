@@ -8,9 +8,10 @@ namespace proiect.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Nume { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
+        public string Descriere { get; set; }
+        public string Culoare { get; set; }
         public decimal Pret { get; set; }
         public int Memorie { get; set; }
         public string Dimensiune { get; set; }

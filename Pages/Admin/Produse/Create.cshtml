@@ -8,10 +8,40 @@
 
     <form method="post" enctype="multipart/form-data">
         <div class="mb-3 row">
-            <label class="col-sm-4 col-form-label">Nume</label>
+            <label class="col-sm-4 col-form-label">Brand</label>
             <div class="col-sm-8">
-                <input class="form-control" asp-for="ProdusDto.Nume">
-                <span asp-validation-for="ProdusDto.Nume" class="text-danger"></span>
+                <input class="form-control" asp-for="ProdusDto.Brand">
+                <span asp-validation-for="ProdusDto.Brand" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label class="col-sm-4 col-form-label">Model</label>
+            <div class="col-sm-8">
+                <input class="form-control" asp-for="ProdusDto.Model">
+                <span asp-validation-for="ProdusDto.Model" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label class="col-sm-4 col-form-label">Descriere</label>
+            <div class="col-sm-8">
+                <input class="form-control" asp-for="ProdusDto.Descriere">
+                <span asp-validation-for="ProdusDto.Descriere" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label class="col-sm-4 col-form-label">Culoare</label>
+            <div class="col-sm-8">
+                <input class="form-control" asp-for="ProdusDto.Culoare">
+                <span asp-validation-for="ProdusDto.Culoare" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label class="col-sm-4 col-form-label">Nume imagine</label>
+            <div class="col-sm-8">
+                <input class="form-control" asp-for="ProdusDto.ImageName">
+                <span asp-validation-for="ProdusDto.ImageName" class="text-danger"></span>
             </div>
         </div>
 
