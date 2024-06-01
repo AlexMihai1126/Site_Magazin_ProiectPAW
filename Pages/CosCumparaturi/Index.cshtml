@@ -1,0 +1,36 @@
+﻿@page
+@model proiect.Pages.CosCumparaturi.IndexModel
+@{
+    ViewData["Title"] = "Coș de cumpărături";
+}
+
+<h2>Coșul de cumpărături</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Model</th>
+            <th>Preț</th>
+            <th>Memorie</th>
+            <th>Dimensiune</th>
+            <th>Brand</th>
+            <th>Descriere</th>
+            <th>Culoare</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var produs in Model.CartItems)
+        {
+            <tr>
+                <td>@produs.Model</td>
+                <td>@produs.Pret</td>
+                <td>@produs.Memorie</td>
+                <td>@produs.Dimensiune</td>
+                <td>@produs.Brand</td>
+                <td>@produs.Descriere</td>
+                <td>@produs.Culoare</td>
+            </tr>
+        }
+    </tbody>
+</table>
