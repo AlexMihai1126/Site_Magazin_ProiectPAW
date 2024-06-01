@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using proiect.ContextModels;
 using proiect.Models;
+using proiect.Services;
 
 namespace proiect.Pages.Telefoane
 {
     public class IndexModel : PageModel
     {
         private readonly ProiectDBContext _context;
+        private readonly ShoppingCartService _shoppingCartService;
 
-        public IndexModel(ProiectDBContext context)
+        public IndexModel(ProiectDBContext context, ShoppingCartService shoppingCartService)
         {
             _context = context;
+            _shoppingCartService = shoppingCartService;
         }
 
         public IList<Produs> Produs { get; set; }
@@ -87,6 +90,22 @@ namespace proiect.Pages.Telefoane
             }
 
             Produs = await query.ToListAsync();
+        }
+        public async Task<IActionResult> OnPostAddToCart([FromBody] AddToCartRequest request)
+        {
+            var produs = await _context.Produs.FindAsync(request.Id);
+            if (produs == null)
+            {
+                return NotFound();
+            }
+            _shoppingCartService.AddToCart(produs);
+            return RedirectToPage("Index");
+        }
+
+
+        public class AddToCartRequest
+        {
+            public int Id { get; set; }
         }
     }
 }

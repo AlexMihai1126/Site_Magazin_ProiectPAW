@@ -121,7 +121,7 @@
                             <div class="d-flex justify-content-center">
                                 <div class="btn-group" role="group">
                                     <a href="/ViewProdus/?id=@produs.Id" class="btn btn-secondary">Vezi detalii</a>
-                                    <button onclick="if(@produs.Stoc != 0) { location.href='/CosCumparaturi/AddToCart?id=@produs.Id'; }" class="btn btn-info" @(produs.Stoc == 0 ? "disabled" : "")>
+                                    <button onclick="if (@produs.Stoc > 0) { addToCart(@produs.Id); }" class="btn btn-info" @(produs.Stoc == 0 ? "disabled" : "")>
                                         Adaugă în coș
                                     </button>
                                 </div>
@@ -134,3 +134,7 @@
         
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/addToCart.js"></script>
+}
