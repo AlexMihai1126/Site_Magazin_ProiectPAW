@@ -30,9 +30,31 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="siteSearchbox" placeholder="Cauta un produs">
-                                <button class="btn btn-outline-secondary" type="button" id="siteSearchboxBtn"><i class="bi bi-search"></i></button>
+                                <form method="get" asp-page="/Search/Index" class="input-group">
+                                    <input type="text" class="form-control" name="SearchTerm" id="siteSearchbox" placeholder="Cauta un produs">
+                                    <button class="btn btn-outline-secondary" type="submit" id="siteSearchboxBtn"><i class="bi bi-search"></i></button>
+                                </form>
                             </div>
+                            @section Scripts {
+                                <script>
+                                    document.getElementById('siteSearchboxBtn').addEventListener('click', function () {
+                                        var searchTerm = document.getElementById('siteSearchbox').value;
+                                        if (searchTerm) {
+                                            window.location.href = '/Search?SearchTerm=' + encodeURIComponent(searchTerm);
+                                        }
+                                    });
+
+                                    document.getElementById('siteSearchbox').addEventListener('keypress', function (e) {
+                                        if (e.key === 'Enter') {
+                                            var searchTerm = document.getElementById('siteSearchbox').value;
+                                            if (searchTerm) {
+                                                window.location.href = '/Search?SearchTerm=' + encodeURIComponent(searchTerm);
+                                            }
+                                        }
+                                    });
+                                </script>
+                            }
+
                         </li>
                     </ul>
                     <ul class="navbar-nav flex">

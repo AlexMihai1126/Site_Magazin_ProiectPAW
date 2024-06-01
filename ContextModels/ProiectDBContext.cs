@@ -78,5 +78,13 @@ namespace proiect.ContextModels
 
             modelBuilder.Entity<IdentityRole>().HasData(moderator, client, vizitator);
         }
+
+        public async Task<List<Produs>> SearchProductsAsync(string searchTerm)
+        {
+            return await Produs
+                .Include(p => p.Categorie)
+                .Where(p => p.Model.ToLower().Contains(searchTerm.ToLower()))
+                .ToListAsync();
+        }
     }
 }

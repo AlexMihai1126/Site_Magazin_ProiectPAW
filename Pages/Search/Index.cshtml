@@ -1,0 +1,64 @@
+﻿@page
+@model proiect.Pages.Search.IndexModel
+@{
+    ViewData["Title"] = "Căutare Produse";
+}
+
+<div class="container-fluid mx-auto">
+    <h1 class="text-center my-4">Rezultatele Căutării</h1>
+    <hr />
+    <div class="row mt-4">
+        @if (Model.Produs.Count == 0)
+        {
+            <div class="alert alert-danger mx-auto" role="alert">
+                Nu s-au găsit produse.
+            </div>
+        }
+        else
+        {
+            @foreach (var produs in Model.Produs)
+            {
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="@($"http://localhost:3000/image/{produs.ImageName}")" class="card-img-top" alt="@produs.Model">
+
+                        <div class="card-body">
+                            <h4 class="card-title"><strong>@produs.Model</strong></h4>
+                            <h6 class="card-text"><strong>Brand: </strong>@produs.Brand</h6>
+                            <hr />
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><p class="card-text"><strong>Preț: </strong> @(produs.Pret) RON</p></li>
+                                <li class="list-group-item"> <p class="card-text"><strong>Memorie: </strong> @(produs.Memorie) GB</p></li>
+                            </ul>
+
+                            <div class="accordion" id="@($"prodDesc{produs.Id}")">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#@($"prodDescExpand{produs.Id}")" aria-expanded="true" aria-controls="@($"prodDescExpand{produs.Id}")">
+                                            Detalii produs
+                                        </button>
+                                    </h2>
+                                    <div id="@($"prodDescExpand{produs.Id}")" class="accordion-collapse collapse" data-bs-parent="#@($"prodDesc{produs.Id}")">
+                                        <div class="accordion-body">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item"><p class="card-text"><strong>Dimensiune: </strong> @(produs.Dimensiune)</p></li>
+                                                <li class="list-group-item"><p class="card-text"><strong>Culoare: </strong>@(produs.Culoare)</p></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="d-flex justify-content-center">
+                                <div class="btn-group" role="group">
+                                    <a href="/ViewProdus/?id=@produs.Id" class="btn btn-secondary">Vezi detalii</a>
+                                    <a href="/CosCumparaturi/AddToCart?id=@produs.Id" class="btn btn-info">Adaugă în coș</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
