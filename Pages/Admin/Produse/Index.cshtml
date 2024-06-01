@@ -32,6 +32,8 @@
             <th>Dimensiune</th>
             <th>Categorie</th>
             <th>Imagine</th>
+            <th>Stoc</th>
+            <th>Buc vandute</th>
             <th>Actiuni</th>
             </thead>
 
@@ -54,6 +56,8 @@
                         <td>@(produs.Dimensiune)</td>
                         <td>@(produs.Categorie.Nume)</td>
                         <td>@produs.ImageName</td>
+                        <td>@produs.Stoc</td>
+                        <td>@produs.NrBucVandute</td>
                         <td style="white-space:nowrap">
                             <button type="button" class="btn btn-sm btn-success" onclick="window.location.href='/Admin/Produse/Edit?id=@produs.Id'">Edit</button>
                             <button type="button" class="btn btn-sm btn-danger" onclick="window.location.href='/Admin/Produse/Delete?id=@produs.Id'">Delete</button>

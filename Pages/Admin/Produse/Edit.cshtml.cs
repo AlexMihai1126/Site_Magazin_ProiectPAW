@@ -44,6 +44,7 @@ namespace proiect.Pages.Admin.Produse
             ProdusDto.Pret = produs.Pret;
             ProdusDto.Memorie = produs.Memorie;
             ProdusDto.Dimensiune = produs.Dimensiune;
+            ProdusDto.Stoc = produs.Stoc;
             ProdusDto.CategorieId = produs.CategorieId;
 
             Produs = produs;
@@ -73,6 +74,7 @@ namespace proiect.Pages.Admin.Produse
             produs.Pret = ProdusDto.Pret;
             produs.Memorie = ProdusDto.Memorie;
             produs.Dimensiune = ProdusDto.Dimensiune;
+            produs.Stoc = ProdusDto.Stoc;
             produs.CategorieId = ProdusDto.CategorieId;
 
             context.SaveChanges();

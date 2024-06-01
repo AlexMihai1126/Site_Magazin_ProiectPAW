@@ -78,6 +78,14 @@
         </div>
 
         <div class="mb-3 row">
+            <label class="col-sm-4 col-form-label">Stoc</label>
+            <div class="col-sm-8">
+                <input class="form-control" asp-for="ProdusDto.Stoc">
+                <span asp-validation-for="ProdusDto.Stoc" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
             <label class="col-sm-4 col-form-label">Categorie</label>
             <div class="col-sm-8">
                 <select class="form-select" asp-for="ProdusDto.CategorieId" asp-items="@Model.Categorii"></select>

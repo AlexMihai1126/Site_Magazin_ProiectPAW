@@ -7,7 +7,7 @@ using System.Drawing.Drawing2D;
 
 namespace proiect.Pages.Admin.Produse
 {
-    public class CreateModel : PageModel
+    public class CreateCategModel : PageModel
     {
         private readonly IWebHostEnvironment environment;
         private readonly ProiectDBContext context;
@@ -15,7 +15,7 @@ namespace proiect.Pages.Admin.Produse
 
         [BindProperty]
         public ProdusDto ProdusDto { get; set; }
-        public CreateModel(IWebHostEnvironment environment, ProiectDBContext context)
+        public CreateCategModel(IWebHostEnvironment environment, ProiectDBContext context)
         {
             this.environment = environment;
             this.context = context;
@@ -44,6 +44,7 @@ namespace proiect.Pages.Admin.Produse
                 Pret = ProdusDto.Pret,
                 Memorie = ProdusDto.Memorie,
                 Dimensiune = ProdusDto.Dimensiune,
+                Stoc=ProdusDto.Stoc,
                 CategorieId = ProdusDto.CategorieId,
             };
 

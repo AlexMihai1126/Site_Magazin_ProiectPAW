@@ -24,6 +24,8 @@ namespace proiect.Models
         [Required(ErrorMessage = "Dimensiune is required")]
         public string Dimensiune { get; set; }
 
+        public int Stoc { get; set; }
+
         [Required(ErrorMessage = "Imagine is required")]
         public string ImageName { get; set; }
 

@@ -83,6 +83,21 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"><p class="card-text"><strong>Preț: </strong> @(produs.Pret) RON</p></li>
                                 <li class="list-group-item"> <p class="card-text"><strong>Memorie: </strong> @(produs.Memorie) GB</p></li>
+                                <li class="list-group-item">
+                                    <p>
+                                        Disponibilitate:
+                                        <strong>
+                                            @if (produs.Stoc > 0)
+                                            {
+                                                <span class="text-success">În stoc</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-danger">Nu este pe stoc</span>
+                                            }
+                                        </strong>
+                                    </p>
+                                </li>
                             </ul>
 
                             <div class="accordion" id="@($"prodDesc{produs.Id}")">
@@ -106,7 +121,9 @@
                             <div class="d-flex justify-content-center">
                                 <div class="btn-group" role="group">
                                     <a href="/ViewProdus/?id=@produs.Id" class="btn btn-secondary">Vezi detalii</a>
-                                    <a href="/CosCumparaturi/AddToCart?id=@produs.Id" class="btn btn-info">Adaugă în coș</a>
+                                    <button onclick="if(@produs.Stoc != 0) { location.href='/CosCumparaturi/AddToCart?id=@produs.Id'; }" class="btn btn-info" @(produs.Stoc == 0 ? "disabled" : "")>
+                                        Adaugă în coș
+                                    </button>
                                 </div>
                             </div>
                         </div>

@@ -22,10 +22,27 @@
                 <li class="list-group-item"><p>Dimensiuni: <strong>@Model.Produs.Dimensiune</strong></p></li>
                 <li class="list-group-item"><p>Descriere: <strong>@Model.Produs.Descriere</strong></p></li>
                 <li class="list-group-item"><p>Categorie: <strong>@Model.Produs.Categorie.Nume</strong></p></li>
+                <li class="list-group-item">
+                    <p>
+                        Disponibilitate:
+                        <strong>
+                            @if (Model.Produs.Stoc > 0)
+                            {
+                                <span class="text-success">În stoc</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger">Nu este pe stoc</span>
+                            }
+                        </strong>
+                    </p>
+                </li>
             </ul>    
             <h4>Pret: <strong>@Model.Produs.Pret LEI</strong></h4>
             <div class="d-grid gap-2">
-                <a href="/CosCumparaturi/AddToCart?id=@Model.Produs.Id" class="btn btn-info w-100">Adaugă în coș</a>
+                <button onclick="if(@Model.Produs.Stoc != 0) { location.href='/CosCumparaturi/AddToCart?id=@Model.Produs.Id'; }" class="btn btn-info" @(Model.Produs.Stoc == 0 ? "disabled" : "")>
+                    Adaugă în coș
+                </button>
             </div>
         </div>
     </div>
