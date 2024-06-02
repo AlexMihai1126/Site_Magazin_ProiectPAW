@@ -20,12 +20,10 @@ namespace proiect.ContextModels
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configure precision and scale for Pret property in Produs entity
             modelBuilder.Entity<Produs>()
                 .Property(p => p.Pret)
                 .HasPrecision(18, 2);
 
-            // Configure relationships
             modelBuilder.Entity<Review>()
                 .HasOne(r => r.Produs)
                 .WithMany(p => p.Reviews)
@@ -66,7 +64,6 @@ namespace proiect.ContextModels
                 .WithMany()
                 .HasForeignKey(f => f.ProdusId);
 
-            // Seed roles data
             var moderator = new IdentityRole("moderator");
             moderator.NormalizedName = "MODERATOR";
 

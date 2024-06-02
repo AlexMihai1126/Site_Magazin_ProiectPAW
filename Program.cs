@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using proiect.ContextModels;
 using Microsoft.AspNetCore.Identity;
 using proiect.Models;
-using Microsoft.AspNetCore.Http;
 using proiect.Services;
 
 var builder = WebApplication.CreateBuilder(args);

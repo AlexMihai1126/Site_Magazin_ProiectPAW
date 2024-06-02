@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using proiect.ContextModels;
 using proiect.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace proiect.Pages
 {
