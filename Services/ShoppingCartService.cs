@@ -26,8 +26,10 @@ namespace proiect.Services
 
             var session = _httpContextAccessor.HttpContext.Session;
             var cart = session.GetObjectFromJson<List<Produs>>("Cart") ?? new List<Produs>();
-
-            cart.Add(produs);
+            if(produs.Stoc > 0)
+            {
+                cart.Add(produs);
+            }
 
             session.SetObjectAsJson("Cart", cart);
         }
