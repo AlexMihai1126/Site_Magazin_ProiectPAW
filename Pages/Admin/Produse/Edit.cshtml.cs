@@ -79,7 +79,6 @@ namespace proiect.Pages.Admin.Produse
 
             context.SaveChanges();
 
-            Produs = produs;
             Response.Redirect("/Admin/Produse/Index");
         }
     }

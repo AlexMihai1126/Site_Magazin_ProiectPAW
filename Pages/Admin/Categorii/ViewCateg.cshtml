@@ -2,3 +2,48 @@
 @model proiect.Pages.Admin.Categorii.ViewCategModel
 @{
 }
+<div class="container-fluid">
+    <h2 class="text-center mb-5">Lista de categorii</h2>
+
+    <hr />
+
+    <div class="d-grid gap-2">
+        <a class='btn btn-success' href='/Admin/Categorii/CreateCateg'>Categorie noua</a>
+    </div>
+
+    <hr />
+    @if (Model.Categorii.Count() == 0)
+    {
+        <div class="<div class=" col-md-3 col-sm-6 mb-4">
+            <div class="alert alert-danger mx-auto role="alert">
+                Nu s-au găsit categorii.
+            </div>
+        </div>
+    }
+    else
+    {
+        <table class="table table-striped table-hover">
+            <thead>
+            <th>ID</th>
+            <th>Nume</th>
+            <th>Actiuni</th>
+            </thead>
+
+            <tbody class="table-group-divider">
+
+                @foreach (var cat in Model.Categorii)
+                {
+                    <tr>
+                        <td>@cat.Id</td>
+                        <td>@cat.Nume</td>
+                        <td style="white-space:nowrap">
+                            <button type="button" class="btn btn-sm btn-success" onclick="window.location.href='/Admin/Categorii/EditCateg?id=@cat.Id'">Edit</button>
+                            <button type="button" class="btn btn-sm btn-danger" onclick="window.location.href='/Admin/Categorii/DeleteCateg?id=@cat.Id'">Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>

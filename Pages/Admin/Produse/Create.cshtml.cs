@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using proiect.ContextModels;
 using proiect.Models;
-using System.Drawing.Drawing2D;
 
 namespace proiect.Pages.Admin.Produse
 {
-    public class CreateCategModel : PageModel
+    public class CreateModel : PageModel
     {
         private readonly IWebHostEnvironment environment;
         private readonly ProiectDBContext context;
@@ -15,7 +14,7 @@ namespace proiect.Pages.Admin.Produse
 
         [BindProperty]
         public ProdusDto ProdusDto { get; set; }
-        public CreateCategModel(IWebHostEnvironment environment, ProiectDBContext context)
+        public CreateModel(IWebHostEnvironment environment, ProiectDBContext context)
         {
             this.environment = environment;
             this.context = context;

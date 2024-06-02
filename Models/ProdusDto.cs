@@ -29,7 +29,6 @@ namespace proiect.Models
         [Required(ErrorMessage = "Imagine is required")]
         public string ImageName { get; set; }
 
-        // Foreign key property
         [Required, ForeignKey("Categorie")]
         public int CategorieId { get; set; }
     }

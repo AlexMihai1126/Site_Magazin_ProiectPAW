@@ -2,3 +2,23 @@
 @model proiect.Pages.Admin.Categorii.CreateCategModel
 @{
 }
+<div class="container">
+    <h2 class="text-center mb-5">Categorie noua</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3 row">
+            <label class="col-sm-4 col-form-label">Nume</label>
+            <div class="col-sm-8">
+                <input class="form-control" asp-for="Categorie.Nume">
+                <span asp-validation-for="Categorie.Nume" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-success">Salveaza</button>
+                <a class="btn btn-danger" href="/Admin/Categorii/ViewCateg" role="button">Anuleaza</a>
+            </div>
+        </div>
+    </form>
+</div>
