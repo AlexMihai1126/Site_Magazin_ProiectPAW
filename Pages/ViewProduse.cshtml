@@ -2,9 +2,10 @@
 @model proiect.Pages.ViewProduse
 @{
     ViewData["Title"] = "Produse";
+    string categorieView = string.IsNullOrEmpty(Model.Categorie) ? new string("Toate produsele") : char.ToUpper(Model.Categorie[0]) + Model.Categorie.Substring(1).ToLower();
 }
 <div class="container-fluid mx-auto">
-    <h1 class="text-center my-4">Telefoane</h1>
+    <h1 class="text-center my-4">@categorieView</h1>
     <hr />
     <div class="accordion mb-4" id="filtrari-meniu">
         <div class="accordion-item">
@@ -15,43 +16,48 @@
             </h2>
             <div id="filtrari-meniu-data" class="accordion-collapse collapse" data-bs-parent="#filtrari-meniu">
                 <div class="accordion-body">
-                    <form method="get" asp-page="/Telefoane/Index">
+                    <form method="get">
+                        <input type="hidden" name="categorie" value="@Model.Categorie" />
                         <div class="mb-3">
                             <label for="brand" class="form-label">Brand:</label>
-                            <input type="text" class="form-control" id="brand" name="Brand">
+                            <input type="text" class="form-control" id="brand" name="Brand" value="@Model.Brand">
                         </div>
 
                         <div class="mb-3">
                             <label for="model" class="form-label">Model:</label>
-                            <input type="text" class="form-control" id="model" name="Model">
+                            <input type="text" class="form-control" id="model" name="Model" value="@Model.Model">
                         </div>
 
                         <div class="mb-3">
                             <label for="culoare" class="form-label">Culoare:</label>
-                            <input type="text" class="form-control" id="culoare" name="Culoare">
+                            <input type="text" class="form-control" id="culoare" name="Culoare" value="@Model.Culoare">
                         </div>
 
                         <div class="mb-3">
                             <label for="pretMin" class="form-label">Preț Minim:</label>
-                            <input type="number" class="form-control" id="pretMin" name="PretMin">
+                            <input type="number" class="form-control" id="pretMin" name="PretMin" value="@Model.PretMin">
                         </div>
                         <div class="mb-3">
                             <label for="pretMax" class="form-label">Preț Maxim:</label>
-                            <input type="number" class="form-control" id="pretMax" name="PretMax">
+                            <input type="number" class="form-control" id="pretMax" name="PretMax" value="@Model.PretMax">
                         </div>
                         <div class="mb-3">
                             <label for="memorieMin" class="form-label">Memorie Minimă:</label>
-                            <input type="number" class="form-control" id="memorieMin" name="MemorieMin">
+                            <input type="number" class="form-control" id="memorieMin" name="MemorieMin" value="@Model.MemorieMin">
                         </div>
                         <div class="mb-3">
                             <label for="memorieMax" class="form-label">Memorie Maximă:</label>
-                            <input type="number" class="form-control" id="memorieMax" name="MemorieMax">
+                            <input type="number" class="form-control" id="memorieMax" name="MemorieMax" value="@Model.MemorieMax">
                         </div>
                         <div class="mb-3">
                             <label for="dimensiune" class="form-label">Dimensiune:</label>
-                            <input type="text" class="form-control" id="dimensiune" name="Dimensiune">
+                            <input type="text" class="form-control" id="dimensiune" name="Dimensiune" value="@Model.Dimensiune">
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Filtrează</button>
+                    </form>
+                    <form method="post" asp-page-handler="ResetFilters">
+                        <input type="hidden" name="Categorie" value="@Model.Categorie" />
+                        <button type="submit" class="btn btn-secondary w-100">Resetează filtrele</button>
                     </form>
                 </div>
             </div>
@@ -140,7 +146,7 @@
             @for (int i = 1; i <= Model.TotalPages; i++)
             {
                 <li class="page-item @(i == Model.PageIndex ? "active" : "")">
-                    <a class="page-link" href="?PageIndex=@i">@i</a>
+                    <a class="page-link" href="@Url.Page("/ViewProduse", new { PageIndex = i, categorie = Model.Categorie, Brand = Model.Brand, Culoare = Model.Culoare, Model = Model.Model, PretMin = Model.PretMin, PretMax = Model.PretMax, MemorieMin = Model.MemorieMin, MemorieMax = Model.MemorieMax, Dimensiune = Model.Dimensiune })">@i</a>
                 </li>
             }
         </ul>

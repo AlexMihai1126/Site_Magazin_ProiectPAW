@@ -25,6 +25,30 @@ namespace proiect.Pages
         [BindProperty(SupportsGet = true)]
         public string Categorie { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string? Brand { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string? Culoare { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string? Model { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public decimal? PretMin { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public decimal? PretMax { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public int? MemorieMin { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public int? MemorieMax { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string? Dimensiune { get; set; }
+
         public ViewProduse(ProiectDBContext context, ShoppingCartService shoppingCartService)
         {
             _context = context;
@@ -32,28 +56,6 @@ namespace proiect.Pages
         }
 
         public IList<Produs> Produs { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public string Brand { get; set; }
-
-
-        [BindProperty(SupportsGet = true)]
-        public string Culoare { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public string Model { get; set; }
-
-
-        [BindProperty(SupportsGet = true)]
-        public decimal? PretMin { get; set; }
-        [BindProperty(SupportsGet = true)]
-        public decimal? PretMax { get; set; }
-        [BindProperty(SupportsGet = true)]
-        public int? MemorieMin { get; set; }
-        [BindProperty(SupportsGet = true)]
-        public int? MemorieMax { get; set; }
-        [BindProperty(SupportsGet = true)]
-        public string Dimensiune { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -129,6 +131,19 @@ namespace proiect.Pages
             }
         }
 
+        public async Task<IActionResult> OnPostResetFilters()
+        {
+            Brand = null;
+            Model = null;
+            Culoare = null;
+            PretMin = null;
+            PretMax = null;
+            MemorieMin = null;
+            MemorieMax = null;
+            Dimensiune = null;
+
+            return RedirectToPage(new { Categorie });
+        }
 
 
         public class AddToCartRequest
