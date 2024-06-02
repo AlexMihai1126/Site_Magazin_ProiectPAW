@@ -39,6 +39,23 @@ namespace proiect.Services
             var cart = session.GetObjectFromJson<List<Produs>>("Cart") ?? new List<Produs>();
             return cart;
         }
+
+        public void RemoveFromCart(int id)
+        {
+            var session = _httpContextAccessor.HttpContext?.Session;
+            if (session == null)
+            {
+                throw new InvalidOperationException("Session is not available");
+            }
+
+            var cart = session.GetObjectFromJson<List<Produs>>("Cart") ?? new List<Produs>();
+            var item = cart.FirstOrDefault(p => p.Id == id);
+            if (item != null)
+            {
+                cart.Remove(item);
+                session.SetObjectAsJson("Cart", cart);
+            }
+        }
     }
 
     public static class SessionExtensions
@@ -60,5 +77,6 @@ namespace proiect.Services
             return value == null ? default : JsonSerializer.Deserialize<T>(value);
         }
     }
-
 }
+
+
