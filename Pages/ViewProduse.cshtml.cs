@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using proiect.ContextModels;
@@ -11,6 +11,16 @@ namespace proiect.Pages
     {
         private readonly ProiectDBContext _context;
         private readonly ShoppingCartService _shoppingCartService;
+
+        
+        public IList<Produs> Produse { get; set; }
+        public int PageSize { get; } = 8; // Numărul de produse pe pagină
+        [BindProperty(SupportsGet = true)]
+        public int PageIndex { get; set; } = 1;
+
+        // Proprietate pentru a calcula numărul total de pagini
+        public int TotalPages { get; set; }
+
 
         [BindProperty(SupportsGet = true)]
         public string Categorie { get; set; }
@@ -94,7 +104,16 @@ namespace proiect.Pages
                 query = query.Where(p => p.Dimensiune == Dimensiune);
             }
 
-            Produs = await query.ToListAsync();
+            // Numărul total de produse după filtrare
+            int totalItems = await query.CountAsync();
+
+            // Calcularea numărului total de pagini
+            TotalPages = (int)Math.Ceiling(totalItems / (double)PageSize);
+
+            // Obținerea paginii curente și a listei de produse
+            Produs = await query.Skip((PageIndex - 1) * PageSize)
+                               .Take(PageSize)
+                               .ToListAsync();
         }
 
         public async Task<IActionResult> OnPostAddToCart([FromBody] AddToCartRequest request)

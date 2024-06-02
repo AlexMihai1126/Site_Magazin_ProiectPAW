@@ -134,6 +134,18 @@
         }
 
     </div>
+    <!-- Butoanele de navigare între pagini -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                    <a class="page-link" href="?PageIndex=@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+
 </div>
 
 @section Scripts {
