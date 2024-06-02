@@ -48,6 +48,12 @@ app.UseSession();
 
 app.MapRazorPages();
 
+app.MapGet("/Account/IsAuthenticated", async context =>
+{
+    var isAuthenticated = context.User.Identity?.IsAuthenticated ?? false;
+    await context.Response.WriteAsJsonAsync(new { isAuthenticated });
+});
+
 app.MapPost("/ViewProduse/AddToCart", async context =>
 {
     var handler = context.RequestServices.GetRequiredService<proiect.Pages.ViewProduse>();
