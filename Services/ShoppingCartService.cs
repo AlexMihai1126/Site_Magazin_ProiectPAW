@@ -1,7 +1,7 @@
 ﻿using proiect.ContextModels;
 using proiect.Models;
-using SQLitePCL;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace proiect.Services
 {
@@ -30,9 +30,6 @@ namespace proiect.Services
             cart.Add(produs);
 
             session.SetObjectAsJson("Cart", cart);
-
-            // Save session changes if necessary
-            await session.CommitAsync();
         }
 
         public List<Produs> GetCartItems()
@@ -63,6 +60,17 @@ namespace proiect.Services
                 session.SetObjectAsJson("Cart", cart);
             }
         }
+
+        public async Task ClearCartAsync()
+        {
+            var session = _httpContextAccessor.HttpContext?.Session;
+            if (session == null)
+            {
+                throw new InvalidOperationException("Session is not available");
+            }
+
+            session.Remove("Cart");
+        }
     }
 
     public static class SessionExtensions
@@ -84,5 +92,4 @@ namespace proiect.Services
             return value == null ? default : JsonSerializer.Deserialize<T>(value);
         }
     }
-
 }

@@ -9,7 +9,7 @@
         <a class='btn btn-secondary' href='/Telefoane/Index'>Inapoi la pagina</a>
     </div>
     <hr />
-    @if(Model.CartItems.Count != 0)
+    @if (Model.CartItems.Count != 0)
     {
         <table class="table table-striped table-hover">
             <thead>
@@ -20,8 +20,7 @@
                     <th>Dimensiune</th>
                     <th>Brand</th>
                     <th>Culoare</th>
-                    <th>Stergere</th>
-
+                    <th>Stergere?</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -44,13 +43,19 @@
                 }
             </tbody>
         </table>
-    } else
+        <div class="d-flex justify-content-between mt-4">
+            <h4>Total: @Model.TotalPrice.ToString("0.00 RON")</h4>
+            <form method="post" asp-page-handler="Clear">
+                <button type="submit" class="btn btn-sm btn-success">Catre plata</button>
+            </form>
+        </div>
+    }
+    else
     {
-        <div class="<div class=" col-md-3 col-sm-6 mb-4">
-            <div class="alert alert-danger mx-auto role="alert">
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="alert alert-danger mx-auto" role="alert">
                 Nu aveti produse in cos.
             </div>
         </div>
     }
-
 </div>
