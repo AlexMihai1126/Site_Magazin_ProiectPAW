@@ -1,6 +1,6 @@
 async function addToCart(produsId) {
     try {
-        await fetch('/Telefoane/AddToCart', {
+        await fetch('/ViewProduse/AddToCart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

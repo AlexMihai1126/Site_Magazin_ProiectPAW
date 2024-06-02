@@ -1,11 +1,14 @@
 ﻿@page
 @model proiect.Pages.ViewProdusModel
+@{
+    ViewData["Title"] = "Detalii produs";
+}
 
 <div class="container">
     <h2 class="text-center mb-5">Vizualizare produs @Model.Produs.Model</h2>
     <hr />
     <div class="d-grid gap-2">
-        <a href="/Telefoane" class="btn btn-secondary w-100">Inapoi</a>
+        <a href="/ViewProduse" class="btn btn-secondary w-100">Inapoi</a>
     </div>
     
     <hr />

@@ -24,7 +24,7 @@ builder.Services.AddSession();
 builder.Services.AddScoped<ShoppingCartService>();
 
 // Înregistrează IndexModel ca un serviciu
-builder.Services.AddScoped<proiect.Pages.Telefoane.IndexModel>();
+builder.Services.AddScoped<proiect.Pages.ViewProduse>();
 
 
 var app = builder.Build();
@@ -48,12 +48,14 @@ app.UseSession();
 
 app.MapRazorPages();
 
-app.MapPost("/Telefoane/AddToCart", async context =>
+app.MapPost("/ViewProduse/AddToCart", async context =>
 {
-    var handler = context.RequestServices.GetRequiredService<proiect.Pages.Telefoane.IndexModel>();
-    var request = await context.Request.ReadFromJsonAsync<proiect.Pages.Telefoane.IndexModel.AddToCartRequest>();
-    await handler.OnPostAddToCart(request);
+    var handler = context.RequestServices.GetRequiredService<proiect.Pages.ViewProduse>();
+    var request = await context.Request.ReadFromJsonAsync<proiect.Pages.ViewProduse.AddToCartRequest>();
+    var result = await handler.OnPostAddToCart(request);
+    await context.Response.WriteAsJsonAsync(result);
 }).RequireAuthorization();
+
 
 
 app.Run();

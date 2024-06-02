@@ -5,10 +5,10 @@
 }
 
 <div class="btn-group container-fluid" role="group">
-    <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/telefoane")'">Telefoane <i class="bi bi-phone"></i></button>
-    <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/Televizoare/Index")'">Televizoare <i class="bi bi-tv"></i></button>
-    <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/Tablete/Index")'">Tablete <i class="bi bi-tablet-landscape"></i></button>
-    <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/Laptopuri/Index")'">Laptopuri <i class="bi bi-laptop"></i></button>
+    <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "telefoane" })'">Telefoane <i class="bi bi-phone"></i></button>
+    <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "televizoare" })'">Televizoare <i class="bi bi-tv"></i></button>
+    <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "tablete" })'">Tablete <i class="bi bi-tablet-landscape"></i></button>
+    <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "laptopuri" })'">Laptopuri <i class="bi bi-laptop"></i></button>
 </div>
 
 <div class="text-center">

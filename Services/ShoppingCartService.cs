@@ -1,5 +1,6 @@
 ﻿using proiect.ContextModels;
 using proiect.Models;
+using SQLitePCL;
 using System.Text.Json;
 
 namespace proiect.Services
@@ -15,17 +16,23 @@ namespace proiect.Services
             _context = context;
         }
 
-        public void AddToCart(Produs produs)
+        public async Task AddToCartAsync(int produsId)
         {
-            var session = _httpContextAccessor.HttpContext?.Session;
-            if (session == null)
+            var produs = await _context.Produs.FindAsync(produsId);
+            if (produs == null)
             {
-                throw new InvalidOperationException("Session is not available");
+                throw new InvalidOperationException("Product not found");
             }
 
+            var session = _httpContextAccessor.HttpContext.Session;
             var cart = session.GetObjectFromJson<List<Produs>>("Cart") ?? new List<Produs>();
+
             cart.Add(produs);
+
             session.SetObjectAsJson("Cart", cart);
+
+            // Save session changes if necessary
+            await session.CommitAsync();
         }
 
         public List<Produs> GetCartItems()
@@ -77,6 +84,5 @@ namespace proiect.Services
             return value == null ? default : JsonSerializer.Deserialize<T>(value);
         }
     }
+
 }
-
-
