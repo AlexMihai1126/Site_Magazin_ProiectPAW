@@ -1,7 +1,6 @@
 ﻿using proiect.ContextModels;
 using proiect.Models;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace proiect.Services
 {
@@ -28,7 +27,17 @@ namespace proiect.Services
             var cart = session.GetObjectFromJson<List<Produs>>("Cart") ?? new List<Produs>();
             if(produs.Stoc > 0)
             {
+                var stocNou = produs.Stoc;
+                stocNou--;
+                var nrVanduteNou = produs.NrBucVandute;
+                nrVanduteNou++;
+                
+                produs.Stoc = stocNou;
+                produs.NrBucVandute = nrVanduteNou;
+                _context.Produs.Update(produs);
+                _context.SaveChanges();
                 cart.Add(produs);
+               
             }
 
             session.SetObjectAsJson("Cart", cart);
@@ -58,6 +67,14 @@ namespace proiect.Services
             var item = cart.FirstOrDefault(p => p.Id == id);
             if (item != null)
             {
+                var stocNou = item.Stoc;
+                stocNou++;
+                var nrVanduteNou = item.NrBucVandute;
+                nrVanduteNou--;
+                item.Stoc = stocNou;
+                item.NrBucVandute = nrVanduteNou;
+                _context.Produs.Update(item);
+                _context.SaveChanges();
                 cart.Remove(item);
                 session.SetObjectAsJson("Cart", cart);
             }
