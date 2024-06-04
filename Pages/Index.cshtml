@@ -1,16 +1,212 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Pagina principala";
+}
+<div class="container-fluid">
+    <div class="btn-group container-fluid" role="group">
+        <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "" })'">Toate <i class="bi bi-bag-dash"></i></button>
+        <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "telefoane" })'">Telefoane <i class="bi bi-phone"></i></button>
+        <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "televizoare" })'">Televizoare <i class="bi bi-tv"></i></button>
+        <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "tablete" })'">Tablete <i class="bi bi-tablet-landscape"></i></button>
+        <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "laptopuri" })'">Laptopuri <i class="bi bi-laptop"></i></button>
+    </div>
+    <hr />
+
+    <div class="text-center">
+        <h1>Top produse vandute</h1>
+    </div>
+
+    <hr />
+
+    <!--START-->
+
+    <h2>Top Telefoane</h2>
+    <div class="row mt-4">
+        @foreach (var produs in Model.TopTelefoane)
+        {
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="@($"http://localhost:3000/image/{produs.ImageName}")" class="card-img-top" alt="@produs.Model">
+                    <div class="card-body">
+                        <h4 class="card-title"><strong>@produs.Model</strong></h4>
+                        <h6 class="card-text"><strong>Brand: </strong>@produs.Brand</h6>
+                        <hr />
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><p class="card-text"><strong>Preț: </strong> @(produs.Pret) RON</p></li>
+                            <li class="list-group-item"><p class="card-text"><strong>Memorie: </strong> @(produs.Memorie) GB</p></li>
+                            <li class="list-group-item">
+                                <p>
+                                    Disponibilitate:
+                                    <strong>
+                                        @if (produs.Stoc > 0)
+                                        {
+                                            <span class="text-success">În stoc</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger">Nu este pe stoc</span>
+                                        }
+                                    </strong>
+                                </p>
+                            </li>
+                        </ul>
+                        <hr />
+                        <div class="d-flex justify-content-center">
+                            <div class="btn-group" role="group">
+                                <a href="/ViewProdus/?id=@produs.Id" class="btn btn-secondary">Vezi detalii <i class="bi bi-arrow-up-right-square"></i></a>
+                                <button onclick="if (@produs.Stoc > 0) { addToCart(@produs.Id); }" class="btn btn-info" @(produs.Stoc == 0 ? "disabled" : "")>
+                                    Adaugă în coș <i class="bi bi-bag-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <h2>Top Televizoare</h2>
+    <div class="row mt-4">
+        @foreach (var produs in Model.TopTelevizoare)
+        {
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="@($"http://localhost:3000/image/{produs.ImageName}")" class="card-img-top" alt="@produs.Model">
+                    <div class="card-body">
+                        <h4 class="card-title"><strong>@produs.Model</strong></h4>
+                        <h6 class="card-text"><strong>Brand: </strong>@produs.Brand</h6>
+                        <hr />
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><p class="card-text"><strong>Preț: </strong> @(produs.Pret) RON</p></li>
+                            <li class="list-group-item"><p class="card-text"><strong>Memorie: </strong> @(produs.Memorie) GB</p></li>
+                            <li class="list-group-item">
+                                <p>
+                                    Disponibilitate:
+                                    <strong>
+                                        @if (produs.Stoc > 0)
+                                        {
+                                            <span class="text-success">În stoc</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger">Nu este pe stoc</span>
+                                        }
+                                    </strong>
+                                </p>
+                            </li>
+                        </ul>
+                        <hr />
+                        <div class="d-flex justify-content-center">
+                            <div class="btn-group" role="group">
+                                <a href="/ViewProdus/?id=@produs.Id" class="btn btn-secondary">Vezi detalii <i class="bi bi-arrow-up-right-square"></i></a>
+                                <button onclick="if (@produs.Stoc > 0) { addToCart(@produs.Id); }" class="btn btn-info" @(produs.Stoc == 0 ? "disabled" : "")>
+                                    Adaugă în coș <i class="bi bi-bag-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <h2>Top Tablete</h2>
+    <div class="row mt-4">
+        @foreach (var produs in Model.TopTablete)
+        {
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="@($"http://localhost:3000/image/{produs.ImageName}")" class="card-img-top" alt="@produs.Model">
+                    <div class="card-body">
+                        <h4 class="card-title"><strong>@produs.Model</strong></h4>
+                        <h6 class="card-text"><strong>Brand: </strong>@produs.Brand</h6>
+                        <hr />
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><p class="card-text"><strong>Preț: </strong> @(produs.Pret) RON</p></li>
+                            <li class="list-group-item"><p class="card-text"><strong>Memorie: </strong> @(produs.Memorie) GB</p></li>
+                            <li class="list-group-item">
+                                <p>
+                                    Disponibilitate:
+                                    <strong>
+                                        @if (produs.Stoc > 0)
+                                        {
+                                            <span class="text-success">În stoc</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger">Nu este pe stoc</span>
+                                        }
+                                    </strong>
+                                </p>
+                            </li>
+                        </ul>
+                        <hr />
+                        <div class="d-flex justify-content-center">
+                            <div class="btn-group" role="group">
+                                <a href="/ViewProdus/?id=@produs.Id" class="btn btn-secondary">Vezi detalii <i class="bi bi-arrow-up-right-square"></i></a>
+                                <button onclick="if (@produs.Stoc > 0) { addToCart(@produs.Id); }" class="btn btn-info" @(produs.Stoc == 0 ? "disabled" : "")>
+                                    Adaugă în coș <i class="bi bi-bag-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <h2>Top Laptopuri</h2>
+    <div class="row mt-4">
+        @foreach (var produs in Model.TopLaptopuri)
+        {
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="@($"http://localhost:3000/image/{produs.ImageName}")" class="card-img-top" alt="@produs.Model">
+                    <div class="card-body">
+                        <h4 class="card-title"><strong>@produs.Model</strong></h4>
+                        <h6 class="card-text"><strong>Brand: </strong>@produs.Brand</h6>
+                        <hr />
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><p class="card-text"><strong>Preț: </strong> @(produs.Pret) RON</p></li>
+                            <li class="list-group-item"><p class="card-text"><strong>Memorie: </strong> @(produs.Memorie) GB</p></li>
+                            <li class="list-group-item">
+                                <p>
+                                    Disponibilitate:
+                                    <strong>
+                                        @if (produs.Stoc > 0)
+                                        {
+                                            <span class="text-success">În stoc</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger">Nu este pe stoc</span>
+                                        }
+                                    </strong>
+                                </p>
+                            </li>
+                        </ul>
+                        <hr />
+                        <div class="d-flex justify-content-center">
+                            <div class="btn-group" role="group">
+                                <a href="/ViewProdus/?id=@produs.Id" class="btn btn-secondary">Vezi detalii <i class="bi bi-arrow-up-right-square"></i></a>
+                                <button onclick="if (@produs.Stoc > 0) { addToCart(@produs.Id); }" class="btn btn-info" @(produs.Stoc == 0 ? "disabled" : "")>
+                                    Adaugă în coș <i class="bi bi-bag-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!--SFARSIT-->
+</div>
+
+@section Scripts {
+    <script src="~/js/addToCart.js"></script>
 }
 
-<div class="btn-group container-fluid" role="group">
-    <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "telefoane" })'">Telefoane <i class="bi bi-phone"></i></button>
-    <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "televizoare" })'">Televizoare <i class="bi bi-tv"></i></button>
-    <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "tablete" })'">Tablete <i class="bi bi-tablet-landscape"></i></button>
-    <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "laptopuri" })'">Laptopuri <i class="bi bi-laptop"></i></button>
-</div>
 
-<div class="text-center">
-    <h1>Pagina de start</h1>
-</div>
+

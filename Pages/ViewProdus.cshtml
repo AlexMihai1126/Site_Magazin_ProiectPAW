@@ -8,7 +8,7 @@
     <h2 class="text-center mb-5">Vizualizare produs @Model.Produs.Model</h2>
     <hr />
     <div class="d-grid gap-2">
-        <a href="/ViewProduse" class="btn btn-secondary w-100">Inapoi</a>
+        <a href="/ViewProduse" class="btn btn-secondary w-100">Inapoi <i class="bi bi-arrow-left-square"></i></a>
     </div>
     
     <hr />
@@ -44,7 +44,7 @@
             <h4>Pret: <strong>@Model.Produs.Pret LEI</strong></h4>
             <div class="d-grid gap-2">
                 <button onclick="if (@Model.Produs.Stoc > 0) { addToCart(@Model.Produs.Id); }" class="btn btn-info" @(Model.Produs.Stoc == 0 ? "disabled" : "")>
-                    Adaugă în coș
+                    Adaugă în coș <i class="bi bi-bag-plus"></i>
                 </button>
             </div>
         </div>

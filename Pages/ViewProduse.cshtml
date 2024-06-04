@@ -7,6 +7,14 @@
 <div class="container-fluid mx-auto">
     <h1 class="text-center my-4">@categorieView</h1>
     <hr />
+    <div class="btn-group container-fluid" role="group">
+        <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "" })'">Toate <i class="bi bi-bag-dash"></i></button>
+        <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "telefoane" })'">Telefoane <i class="bi bi-phone"></i></button>
+        <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "televizoare" })'">Televizoare <i class="bi bi-tv"></i></button>
+        <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "tablete" })'">Tablete <i class="bi bi-tablet-landscape"></i></button>
+        <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Page("/ViewProduse", new { categorie = "laptopuri" })'">Laptopuri <i class="bi bi-laptop"></i></button>
+    </div>
+    <hr />
     <div class="accordion mb-4" id="filtrari-meniu">
         <div class="accordion-item">
             <h2 class="accordion-header">
@@ -127,9 +135,9 @@
                             <hr />
                             <div class="d-flex justify-content-center">
                                 <div class="btn-group" role="group">
-                                    <a href="/ViewProdus/?id=@produs.Id" class="btn btn-secondary">Vezi detalii</a>
+                                    <a href="/ViewProdus/?id=@produs.Id" class="btn btn-secondary">Vezi detalii <i class="bi bi-arrow-up-right-square"></i></a>
                                     <button onclick="if (@produs.Stoc > 0) { addToCart(@produs.Id); }" class="btn btn-info" @(produs.Stoc == 0 ? "disabled" : "")>
-                                        Adaugă în coș
+                                        Adaugă în coș <i class="bi bi-bag-plus"></i>
                                     </button>
                                 </div>
                             </div>

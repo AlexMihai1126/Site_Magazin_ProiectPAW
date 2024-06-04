@@ -11,8 +11,6 @@ namespace proiect.ContextModels
         public DbSet<Produs> Produs { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Favorite> Favorite { get; set; }
-        public DbSet<CosCumparaturi> CosCumparaturi { get; set; }
-        public DbSet<ElementCosCumparaturi> ElementCosCumparaturi { get; set; }
 
         public ProiectDBContext(DbContextOptions<ProiectDBContext> options) : base(options) { }
 
@@ -38,21 +36,6 @@ namespace proiect.ContextModels
                 .HasOne(p => p.Categorie)
                 .WithMany(c => c.Produse)
                 .HasForeignKey(p => p.CategorieId);
-
-            modelBuilder.Entity<CosCumparaturi>()
-                .HasOne(c => c.User)
-                .WithMany(u => u.CosCumparaturi)
-                .HasForeignKey(c => c.CUserID);
-
-            modelBuilder.Entity<CosCumparaturi>()
-                .HasMany(c => c.Produse)
-                .WithOne(e => e.CosCumparaturi)
-                .HasForeignKey(e => e.CosCumparaturiId);
-
-            modelBuilder.Entity<ElementCosCumparaturi>()
-                .HasOne(e => e.Produs)
-                .WithMany()
-                .HasForeignKey(e => e.ProdusId);
 
             modelBuilder.Entity<Favorite>()
                 .HasOne(f => f.User)

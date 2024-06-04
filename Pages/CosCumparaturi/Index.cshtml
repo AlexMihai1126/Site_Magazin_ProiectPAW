@@ -10,12 +10,12 @@
         @if(Model.TotalPrice > 0)
         {
             <form method="post" asp-page-handler="Clear">
-                <button type="submit" class="btn btn-sm btn-success">Catre plata</button>
+                <button type="submit" class="btn btn-sm btn-success">Catre plata <i class="bi bi-cash-coin"></i></button>
             </form>
         }
     </div>
     <div class="d-grid gap-2">
-        <a class='btn btn-secondary' href='/ViewProduse'>Inapoi la pagina</a>
+        <a class='btn btn-secondary' href='/ViewProduse'>Inapoi la pagina <i class="bi bi-arrow-left-square"></i></a>
     </div>
     <hr />
     @if (Model.CartItems.Count != 0)
@@ -23,8 +23,8 @@
         <div class="row">
             @foreach (var produs in Model.CartItems)
             {
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
-                    <div class="card h-100 shadow-sm" style="max-width: 16rem;">
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card h-100 shadow-sm">
                         <img src="@($"http://localhost:3000/image/{produs.ImageName}")" class="card-img-top" alt="@produs.Model">
                         <hr />
                         <div class="card-body p-2">
@@ -38,8 +38,8 @@
                                 <input type="hidden" name="id" value="@produs.Id" />
                                 <div class="d-flex justify-content-center">
                                     <div class="btn-group" role="group">
-                                        <a href="/ViewProdus/?id=@produs.Id" class="btn btn-secondary">Vezi detalii</a>
-                                        <button type="submit" class="btn btn-danger">Sterge</button>
+                                        <a href="/ViewProdus/?id=@produs.Id" class="btn btn-secondary">Vezi detalii <i class="bi bi-arrow-up-right-square"></i></a>
+                                        <button type="submit" class="btn btn-danger">Sterge <i class="bi bi-cart-dash"></i></button>
                                     </div>
                                 </div>
                             </form>

@@ -4,17 +4,18 @@
     ViewData["Title"] = "Rezultate cautare";
 }
 
-<div class="container-fluid mx-auto">
+<div class="container-fluid">
     <h1 class="text-center my-4">Rezultatele Căutării</h1>
     <hr />
+    @if (Model.Produs.Count == 0)
+    {
+        <div class="alert alert-danger" role="alert">
+            Nu s-au găsit produse.
+        </div>
+    }
     <div class="row mt-4">
-        @if (Model.Produs.Count == 0)
-        {
-            <div class="alert alert-danger mx-auto" role="alert">
-                Nu s-au găsit produse.
-            </div>
-        }
-        else
+        
+        @if (Model.Produs.Count > 0)
         {
             @foreach (var produs in Model.Produs)
             {
@@ -66,9 +67,9 @@
                             <hr />
                             <div class="d-flex justify-content-center">
                                 <div class="btn-group" role="group">
-                                    <a href="/ViewProdus/?id=@produs.Id" class="btn btn-secondary">Vezi detalii</a>
-                                    <button onclick="if(@produs.Stoc != 0) { location.href='/CosCumparaturi/AddToCart?id=@produs.Id'; }" class="btn btn-info" @(produs.Stoc == 0 ? "disabled" : "")>
-                                        Adaugă în coș
+                                    <a href="/ViewProdus/?id=@produs.Id" class="btn btn-secondary">Vezi detalii <i class="bi bi-arrow-up-right-square"></i></a>
+                                    <button onclick="if (@produs.Stoc > 0) { addToCart(@produs.Id); }" class="btn btn-info" @(produs.Stoc == 0 ? "disabled" : "")>
+                                        Adaugă în coș <i class="bi bi-bag-plus"></i>
                                     </button>
                                 </div>
                             </div>
@@ -79,3 +80,7 @@
         }
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/addToCart.js"></script>
+}
