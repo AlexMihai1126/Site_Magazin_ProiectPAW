@@ -1,21 +1,21 @@
 ﻿@page
 @model proiect.Pages.Admin.Produse.DeleteModel
 @{
-    ViewData["Title"] = "Sterge produs";
+    ViewData["Title"] = "Ștergere produs";
 }
 
 <div class="container">
-    <h1 class="text-center mb-5">Confirmare stergere</h1>
+    <h1 class="text-center mb-5">Confirmare ștergere</h1>
     <hr />
-    <h2 class="text-center">Sigur doresti sa stergi produsul?</h2>
+    <h2 class="text-center">Sigur dorești să ștergi produsul?</h2>
     <hr />
     <form method="post">
         <input type="hidden" name="id" value="@Model.Produs.Id" />
 
         <div class="mb-3 row">
             <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-danger">Sterge</button>
-                <a class="btn btn-secondary" href="/Admin/Produse/Index" role="button">Anuleaza</a>
+                <button type="submit" class="btn btn-danger">Șterge</button>
+                <a class="btn btn-secondary" href="/Admin/Produse/Index" role="button">Anulează</a>
             </div>
         </div>
     </form>

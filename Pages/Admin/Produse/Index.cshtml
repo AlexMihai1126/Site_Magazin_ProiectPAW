@@ -1,7 +1,7 @@
 ﻿@page
 @model proiect.Pages.Admin.Produse.IndexModel
 @{
-    ViewData["Title"] = "Admin Produse";
+    ViewData["Title"] = "Admin produse";
 }
 <div class="container-fluid">
     <h2 class="text-center mb-5">Lista de produse</h2>
@@ -28,14 +28,14 @@
             <th>Model</th>
             <th>Descriere</th>
             <th>Culoare</th>
-            <th>Pret</th>
+            <th>Preț</th>
             <th>Memorie</th>
             <th>Dimensiune</th>
             <th>Categorie</th>
             <th>Imagine</th>
             <th>Stoc</th>
-            <th>Buc vandute</th>
-            <th>Actiuni</th>
+            <th>Vândute</th>
+            <th>Acțiuni</th>
             </thead>
 
             <tbody class="table-group-divider">
@@ -60,8 +60,8 @@
                         <td>@produs.Stoc</td>
                         <td>@produs.NrBucVandute</td>
                         <td style="white-space:nowrap">
-                            <button type="button" class="btn btn-sm btn-success" onclick="window.location.href='/Admin/Produse/Edit?id=@produs.Id'">Edit</button>
-                            <button type="button" class="btn btn-sm btn-danger" onclick="window.location.href='/Admin/Produse/Delete?id=@produs.Id'">Delete</button>
+                            <button type="button" class="btn btn-sm btn-success" onclick="window.location.href='/Admin/Produse/Edit?id=@produs.Id'">Modifică</button>
+                            <button type="button" class="btn btn-sm btn-danger" onclick="window.location.href='/Admin/Produse/Delete?id=@produs.Id'">Șterge</button>
                         </td>
                     </tr>
                     

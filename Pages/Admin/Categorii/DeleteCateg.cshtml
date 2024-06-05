@@ -1,20 +1,20 @@
 ﻿@page
 @model proiect.Pages.Admin.Categorii.DeleteCategModel
 @{
-    ViewData["Title"] = "Sterge categorie";
+    ViewData["Title"] = "Ștergere categorie";
 }
 <div class="container">
-    <h1 class="text-center mb-5">Confirmare stergere</h1>
+    <h1 class="text-center mb-5">Confirmare ștergere</h1>
     <hr />
-    <h2 class="text-center">Sigur doresti sa stergi categoria?</h2>
+    <h2 class="text-center">Sigur dorești să ștergi categoria?</h2>
     <hr />
     <form method="post">
         <input type="hidden" name="id" value="@Model.CategorieProdus.Id" />
 
         <div class="mb-3 row">
             <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-danger">Sterge</button>
-                <a class="btn btn-secondary" href="/Admin/Categorii/ViewCateg" role="button">Anuleaza</a>
+                <button type="submit" class="btn btn-danger">Șterge</button>
+                <a class="btn btn-secondary" href="/Admin/Categorii/ViewCateg" role="button">Anulează</a>
             </div>
         </div>
     </form>
