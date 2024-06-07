@@ -8,7 +8,7 @@ Este nevoie ca utilizatorul să fie înregistrat pentru a putea adăuga produsel
 - orice utilizator poate căuta produse pe site și poate vizualiza informații despre produsul respectiv.
 Produsele sunt împărțite pe categorii 📲: telefoane, laptopuri, televizoare și tablete, dar lista poate continua.
 
-- fiecare categorie are o pagină proprie unde utilizatorii pot filtra produsele după digerite criterii, cum ar fi brand, model, culoare, preț minim, preț maxim 💵, etc. Produsele sunt afișate paginat.
+- fiecare categorie are o pagină proprie unde utilizatorii pot filtra produsele după diferite criterii, cum ar fi brand, model, culoare, preț minim, preț maxim 💵, etc. Produsele sunt afișate paginat.
 
 - pe pagina principală sunt afișate cele mai vândute produse 🔝 din fiecare categorie.
   
@@ -20,3 +20,5 @@ adăugat în coș și un mesaj corespunzător va apărea în dreptul acestuia.
 - adminul poate adăuga, modifica sau șterge produse, dar și categorii de produse 🔧.
   
 - aplicația are un aspect atractiv și responsive 💎.
+
+- Aplicatia necesita si serverul de imagini de la adresa https://github.com/AlexMihai1126/Image-server-ProiectPAW sa fie instalat si pornit pentru a putea incarca imaginile pe site.
